@@ -1,0 +1,29 @@
+#!/bin/bash
+
+scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. $scriptDir/xunit.d/colors.sh
+. $scriptDir/xunit.d/basic-asserts.sh
+. $scriptDir/xunit.d/assertions.sh
+. $scriptDir/xunit.d/tests.sh
+. $scriptDir/xunit.d/test-file.sh
+. $scriptDir/xunit.d/test-dir.sh
+. $scriptDir/xunit.d/utils.sh
+
+if [[ $# = "1" ]]
+then
+	if [ -f $1 ]
+	then
+		printColorized yellow "$1:"
+		testFile $1
+		printResults
+	else
+		if [ -d $1 ]
+		then
+			testDir $1
+			printResults
+		else
+			printColorized red "Not a test file or directory"
+		fi
+	fi
+fi
