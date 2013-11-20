@@ -15,6 +15,7 @@ fi
 . $scriptDir/xunit.d/test-file.sh
 . $scriptDir/xunit.d/test-dir.sh
 . $scriptDir/xunit.d/utils.sh
+. $scriptDir/xunit.d/file-asserts.sh
 
 if [[ $# = "1" ]]
 then
