@@ -1,6 +1,12 @@
 #!/bin/bash
 
-scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#read xunit directory from environment, if not available assume it is on this directory
+if [ "$XUNIT_HOME" = "" ]
+then
+	scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+else
+	scriptDir="$XUNIT_HOME"
+fi
 
 . $scriptDir/xunit.d/colors.sh
 . $scriptDir/xunit.d/basic-asserts.sh

@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#Tests if param 1 and 2 are equal (string)
+#
+# Params:
+#    $1 <-- A string
+#    $2 <-- A string
 function assertEquals {
 	if [ "$1" == "$2" ]
 	then
@@ -9,6 +14,11 @@ function assertEquals {
 	fi
 }
 
+#Tests if param 1 and 2 are NOT equal (string)
+#
+# Params:
+#    $1 <-- A string
+#    $2 <-- A string
 function assertNotEquals {
 	if [ "$1" == "$2" ]
 	then
@@ -18,6 +28,11 @@ function assertNotEquals {
 	fi
 }
 
+#Tests if param 1 is greater than param 2 (integer)
+#
+# Params:
+#    $1 <-- An integer
+#    $2 <-- An integer
 function assertGreaterThan {
 	if [ "$1" -gt "$2" ]
 	then
@@ -27,6 +42,11 @@ function assertGreaterThan {
 	fi
 }
 
+#Tests if param 1 is not greater than param 2 (integer)
+#
+# Params:
+#    $1 <-- An integer
+#    $2 <-- An integer
 function assertNotGreaterThan {
 	if [ "$1" -gt "$2" ]
 	then
@@ -36,6 +56,11 @@ function assertNotGreaterThan {
 	fi
 }
 
+#Tests if param 1 (string) matches the param 2 regexp
+#
+# Params:
+#    $1 <-- A string
+#    $2 <-- A regular expression
 function assertMatches {
 	if [[ "$2" =~ $1 ]]
 	then
@@ -45,6 +70,11 @@ function assertMatches {
 	fi
 }
 
+#Tests if param 1 (string) does not match the param 2 regexp
+#
+# Params:
+#    $1 <-- A string
+#    $2 <-- A regular expression
 function assertNotMatches {
 	if [[ "$2" =~ $1 ]]
 	then
@@ -54,6 +84,13 @@ function assertNotMatches {
 	fi
 }
 
+#Test if a file contains a line matching a regexp
+#
+# Params:
+#    $1 <-- A file
+#    $2 <-- A regular expression
+#
+# @bug test wether the file exists (and is a normal file) to attempt the test
 function assertFileContains {
 	if [[ `grep "$2" $1` = "" ]]
 	then
