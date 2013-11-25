@@ -3,5 +3,6 @@ testDir () {
 	do
 		printColorized yellow "$file:"
 		testFile $1/$file
-	done #< <(ls -l $1 | awk '{ print $NF }' | grep ".sh$")
+	#@bug this line is not SH compatible
+	done < <(ls -l $1 | awk '{ print $NF }' | grep ".sh$")
 }

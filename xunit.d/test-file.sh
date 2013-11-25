@@ -15,7 +15,8 @@ testFile () {
 				$( echo $previousLine | awk '{print $3}' )
 			}
 		}
-	done #< <(grep -n 'function test' $1)
+	#@bug this line is not SH comaptible
+	done < <(grep -n 'function test' $1)
 }
 
 data () {
