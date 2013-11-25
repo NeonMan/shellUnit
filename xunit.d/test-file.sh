@@ -1,6 +1,4 @@
-#!bin/bash
-
-function testFile {
+testFile () {
 	. $1
 	while read lineAndFunc
 	do
@@ -17,16 +15,16 @@ function testFile {
 				$( echo $previousLine | awk '{print $3}' )
 			}
 		}
-	done < <(grep -n 'function test' $1)
+	done #< <(grep -n 'function test' $1)
 }
 
-function data {
+data () {
 	setUp 2> /dev/null
 	doTest $currentTest $@
 	tearDown 2> /dev/null
 }
 
-function doTest {
+doTest () {
 	countTest
 	current_test=$1
 	error="no"
@@ -38,7 +36,7 @@ function doTest {
 	fi
 }
 
-function printResults {
+printResults () {
 	echo
 	if [ $failedAsserts = 0 ]
 	then

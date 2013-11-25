@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #Test if a file contains a line matching a regexp
 #
 # Params:
@@ -7,7 +5,7 @@
 #    $2 <-- A regular expression
 #
 # @bug test wether the file exists (and is a normal file) to attempt the test
-function assertFileContains {
+assertFileContains () {
 	if [[ `grep "$2" $1` = "" ]]
 	then
 		fail "$current_test: expect '$1' to contain '$2'"

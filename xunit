@@ -1,13 +1,13 @@
-#!/bin/bash
 
 #read xunit directory from environment, if not available assume it is on this directory
 if [ "$XUNIT_HOME" = "" ]
 then
-	scriptDir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+	scriptDir="$PWD"
 else
 	scriptDir="$XUNIT_HOME"
 fi
 
+. $scriptDir/xunit.d/setup-shell.sh
 . $scriptDir/xunit.d/colors.sh
 . $scriptDir/xunit.d/basic-asserts.sh
 . $scriptDir/xunit.d/assertions.sh
@@ -16,6 +16,9 @@ fi
 . $scriptDir/xunit.d/test-dir.sh
 . $scriptDir/xunit.d/utils.sh
 . $scriptDir/xunit.d/file-asserts.sh
+
+#Setup environment
+setup_alternatives
 
 if [[ $# = "1" ]]
 then
@@ -33,4 +36,11 @@ then
 			printColorized red "Not a test file or directory"
 		fi
 	fi
+	if [ "$numAsserts" = 0 ]
+	then
+		printColorized yellow "Warning: No asserts"
+	fi
+else
+	#@fixme show help
+	echo "usage: xunit [TEST FILE]|[TEST DIR]"
 fi

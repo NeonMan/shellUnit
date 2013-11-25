@@ -1,9 +1,7 @@
-#!bin/bash
-
-function testDir {
+testDir () {
 	while read file
 	do
 		printColorized yellow "$file:"
 		testFile $1/$file
-	done < <(ls -l $1 | awk '{ print $NF }' | grep ".sh$")
+	done #< <(ls -l $1 | awk '{ print $NF }' | grep ".sh$")
 }

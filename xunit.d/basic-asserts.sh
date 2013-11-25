@@ -1,11 +1,9 @@
-#!/bin/bash
-
 #Tests if param 1 and 2 are equal (string)
 #
 # Params:
 #    $1 <-- A string
 #    $2 <-- A string
-function assertEquals {
+assertEquals () {
 	if [ "$1" == "$2" ]
 	then
 		pass
@@ -19,7 +17,7 @@ function assertEquals {
 # Params:
 #    $1 <-- A string
 #    $2 <-- A string
-function assertNotEquals {
+assertNotEquals () {
 	if [ "$1" == "$2" ]
 	then
 		fail "$current_test: expected NOT to be '$1' but found '$2'"
@@ -33,7 +31,7 @@ function assertNotEquals {
 # Params:
 #    $1 <-- An integer
 #    $2 <-- An integer
-function assertGreaterThan {
+assertGreaterThan () {
 	if [ "$1" -gt "$2" ]
 	then
 		pass
@@ -47,7 +45,7 @@ function assertGreaterThan {
 # Params:
 #    $1 <-- An integer
 #    $2 <-- An integer
-function assertNotGreaterThan {
+assertNotGreaterThan () {
 	if [ "$1" -gt "$2" ]
 	then
 		fail "$current_test: expect '$2' NOT to be greater than '$1'"
@@ -61,7 +59,7 @@ function assertNotGreaterThan {
 # Params:
 #    $1 <-- An integer
 #    $2 <-- An integer
-function assertLessThan {
+assertLessThan () {
         if [ "$1" -lt "$2" ]
         then
                 pass
@@ -75,7 +73,7 @@ function assertLessThan {
 # Params:
 #    $1 <-- An integer
 #    $2 <-- An integer
-function assertNotLessThan {
+assertNotLessThan () {
         if [ "$1" -lt "$2" ]
         then
                 fail "$current_test: expect '$2' NOT to be less than '$1'"
@@ -89,7 +87,7 @@ function assertNotLessThan {
 # Params:
 #    $1 <-- A regular expression
 #    $2 <-- A string
-function assertMatches {
+assertMatches () {
 	if [[ "$2" =~ $1 ]]
 	then
 		pass
@@ -103,7 +101,7 @@ function assertMatches {
 # Params:
 #    $1 <-- A string
 #    $2 <-- A regular expression
-function assertNotMatches {
+assertNotMatches () {
 	if [[ "$2" =~ $1 ]]
 	then
 		fail "$current_test: expect '$2' to NOT match regular expression '$1'"

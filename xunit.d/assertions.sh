@@ -1,19 +1,17 @@
-#!bin/bash
-
 numAsserts=0
 failedAsserts=0
 
 #Increments the numAsserts variable by one
 #
 # Params: None
-function countAssert {
+countAssert () {
 	numAsserts=`expr $numAsserts + 1`
 }
 
 #A test that always passes
 #
 # Params: None
-function pass {
+pass () {
 	countAssert
 }
 
@@ -22,7 +20,7 @@ function pass {
 #
 # Params:
 #    $1 <-- The message to print
-function fail {
+fail () {
 	countAssert
 	echo -n "   "
 	printColorized red "$1"
