@@ -1,3 +1,30 @@
+#Tests if the expression returns true
+#
+# Params:
+#    $1 <-- A '[[' expression string
+assertTrue () {
+	if [[ $1 ]]
+	then
+		pass
+	else
+		fail "$current_test: expression is false"
+	fi
+}
+
+#Tests if the expression returns false
+#
+# Params:
+#    $1 <-- A '[[' expression string
+assertTrue () {
+        if [[ $1 ]]
+        then
+                fail "$current_test: expression is true"
+        else
+                pass
+        fi
+}
+
+
 #Tests if param 1 and 2 are equal (string)
 #
 # Params:
@@ -54,6 +81,15 @@ assertNotGreaterThan () {
 	fi
 }
 
+#Tests if param 1 is greater or equal to param 2
+#
+# Params:
+#    $1 <-- An integer
+#    $2 <-- An integer
+assertGreaterThanOrEqual () {
+	assertNotLessThan $1 $2
+}
+
 #Tests if param 1 is lesser than param 2 (integer)
 #
 # Params:
@@ -80,6 +116,15 @@ assertNotLessThan () {
         else
                 pass
         fi
+}
+
+#Tests if param 1 is less thann or equal to param 2(integer)
+#
+# Params:
+#    $1 <-- An integer
+#    $2 <-- An integer
+assertLessThanOrEqualTo () {
+	assertNotGreaterThan $1 $2
 }
 
 #Tests if param 1 (string) matches the param 2 regexp
