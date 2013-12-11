@@ -41,7 +41,7 @@ import time
 VERBOSE_LEVEL = 1
 SHELL = "/bin/bash"
 SHUNIT_DIR = "./shunit.d/"
-SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'test-dir.sh',  'test-file.sh',  'tests.sh',  'utils.sh')
+SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'tests.sh',  'utils.sh')
 
 #Print an error, vervosity must be at least 0
 def print_error(msg):

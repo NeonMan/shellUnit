@@ -1,11 +1,11 @@
-numAsserts=0
-failedAsserts=0
+SHU_NUM_ASSERTS=0
+SHU_FAILED_ASSERTS=0
 
 #Increments the numAsserts variable by one
 #
 # Params: None
 countAssert () {
-	numAsserts=`expr $numAsserts + 1`
+	SHU_NUM_ASSERTS=`expr $SHU_NUM_ASSERTS + 1`
 }
 
 #A test that always passes
@@ -24,7 +24,5 @@ pass () {
 fail () {
 	countAssert
 	echo "$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,FAIL,$1" >> "$SHU_TMP_DIR/result.csv"
-	#printColorized red "Line $SHU_TEST_LINE: $1"
-	error="yes"
-	failedAsserts=`expr $failedAsserts + 1`
+	SHU_FAILED_ASSERTS=`expr $SHU_FAILED_ASSERTS + 1`
 }
