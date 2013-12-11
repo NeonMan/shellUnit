@@ -13,7 +13,7 @@ countAssert () {
 # Params: None
 pass () {
 	countAssert
-	printColorized green "OK"
+	echo "$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,OK" >> "$SHU_TMP_DIR/result.csv"
 }
 
 #Increment assert count AND error count while showing a message.
@@ -23,8 +23,8 @@ pass () {
 #    $1 <-- The message to print
 fail () {
 	countAssert
-	echo -n "   "
-	printColorized red "Line $SHU_TEST_LINE: $1"
+	echo "$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,FAIL,$1" >> "$SHU_TMP_DIR/result.csv"
+	#printColorized red "Line $SHU_TEST_LINE: $1"
 	error="yes"
 	failedAsserts=`expr $failedAsserts + 1`
 }

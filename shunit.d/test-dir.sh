@@ -1,4 +1,4 @@
-testDir () {
+_testDir () {
 	while read file
 	do
 		printColorized yellow "$file:"

@@ -1,4 +1,4 @@
-testFile () {
+_testFile () {
 	. $1
 	while read lineAndFunc
 	do
@@ -19,13 +19,13 @@ testFile () {
 	done < <(grep -n 'function test' $1)
 }
 
-data () {
+_data () {
 	setUp 2> /dev/null
 	doTest $currentTest $@
 	tearDown 2> /dev/null
 }
 
-doTest () {
+_doTest () {
 	countTest
 	current_test=$1
 	error="no"
@@ -37,7 +37,7 @@ doTest () {
 	fi
 }
 
-printResults () {
+_printResults () {
 	echo
 	if [ $failedAsserts = 0 ]
 	then

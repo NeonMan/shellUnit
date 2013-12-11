@@ -29,6 +29,7 @@
 # -------------------------------------------------------------------------------
 #
 
+import tempfile
 import re
 import sys
 import os.path
@@ -95,6 +96,13 @@ def extract_tests(path):
 
 #Run a test file
 def run_test(path):
+  #setup a temporary dir to store test results
+  tmp_dir = tempfile.TemporaryDirectory("-shunit")
+  os.putenv('SHU_TMP_DIR', tmp_dir.name)
+
+  #export test file name
+  os.putenv('SHU_TEST_FILE', path)
+
   print_message("Running test file <%s>" % path)
   #spawn a shell instance
   sh = subprocess.Popen(SHELL, stdin=subprocess.PIPE)
@@ -121,7 +129,10 @@ def run_test(path):
 
   #Run each test
   for t in tests:
+     #Set SHU_TEST_NAME var
+     sh.stdin.write(bytes("SHU_TEST_NAME=%s\n" % t, 'utf-8'))
      sh.stdin.write(bytes("%s\n" % t, 'utf-8'))
+
   #Wait for test to end
   if sh.poll() == None:
     print_debug("Waiting for spawned shell to terminate <%s>" % path)
@@ -131,6 +142,8 @@ def run_test(path):
   end_time = time.time()
   print_message("Test file completed in %f seconds" % (end_time - start_time))
 
+  #Cleanup temporary directory
+  tmp_dir.cleanup()
 
 #Run all test files from a directory
 def run_directory(path):
