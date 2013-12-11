@@ -29,6 +29,7 @@
 # -------------------------------------------------------------------------------
 #
 
+import re
 import sys
 import os.path
 import os
@@ -51,7 +52,7 @@ def print_warning(msg):
   if VERBOSE_LEVEL >= 2:
     print("[WARNING] %s" % msg)
 
-#Print an ino message, vervosity must be at least 3
+#Print an info message, vervosity must be at least 3
 def print_info(msg):
   if VERBOSE_LEVEL >= 3:
     print("[INFO] %s" % msg)
@@ -70,6 +71,27 @@ def print_message(msg):
 def show_help(exec_name):
   print("Usage: %s [DIRECTORY]|[TEST SCRIPT]" % exec_name)
 
+#Returns a list of test function names, namely functions starting with test
+def extract_tests(path):
+  name_regex      = re.compile("test[a-zA-Z0-9]*\ \(\)\ \{")
+  name_regex_bash = re.compile("function\ test[a-zA-Z0-9]*\ \{")
+  rv = []
+  with open(path, 'r') as sh_file:
+    for l in sh_file.readlines():
+      match = name_regex.match(l)
+      if match:
+        #if line matches the head definition, append the test name to the rv list
+        header = l.strip()
+        name = header[:header.find("(")-1]
+        rv.append(name)
+      else:
+        match = name_regex_bash.match(l)
+        if match:
+          header = l.strip()
+          name = header[len("function "):header.find("{")-1]
+          rv.append(name)
+  return rv
+
 #Run a test file
 def run_test(path):
   print_message("Running test file <%s>" % path)
@@ -84,6 +106,10 @@ def run_test(path):
     sh.stdin.write(bytes(". %s\n" % sh_path, 'utf-8'))
   #Start time in seconds
   start_time = time.time()
+
+  #Get a list of all the tests contained in the testfile
+  tests = extract_tests(path)
+  print(tests)
 
   #Run test calling the testFile shell function
   sh.stdin.write(bytes("testFile %s\n" % path, 'utf-8'))
