@@ -13,6 +13,7 @@ countAssert () {
 # Params: None
 pass () {
 	countAssert
+	printColorized green "OK"
 }
 
 #Increment assert count AND error count while showing a message.
@@ -23,7 +24,7 @@ pass () {
 fail () {
 	countAssert
 	echo -n "   "
-	printColorized red "$1"
+	printColorized red "Line $SHU_TEST_LINE: $1"
 	error="yes"
 	failedAsserts=`expr $failedAsserts + 1`
 }

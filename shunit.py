@@ -85,6 +85,7 @@ def extract_tests(path):
         name = header[:header.find("(")-1]
         rv.append(name)
       else:
+        #Alternate function definition, bash-style
         match = name_regex_bash.match(l)
         if match:
           header = l.strip()
@@ -109,10 +110,18 @@ def run_test(path):
 
   #Get a list of all the tests contained in the testfile
   tests = extract_tests(path)
-  print(tests)
 
-  #Run test calling the testFile shell function
-  sh.stdin.write(bytes("testFile %s\n" % path, 'utf-8'))
+  #Load test file into the context
+  with open(path, 'r') as sh_file:
+    current_line = 1
+    for l in sh_file.readlines():
+      sh.stdin.write(bytes("SHU_TEST_LINE=%d\n" % current_line, 'utf-8'))
+      current_line = current_line + 1
+      sh.stdin.write(bytes("%s\n" % l, 'utf-8'))
+
+  #Run each test
+  for t in tests:
+     sh.stdin.write(bytes("%s\n" % t, 'utf-8'))
   #Wait for test to end
   if sh.poll() == None:
     print_debug("Waiting for spawned shell to terminate <%s>" % path)

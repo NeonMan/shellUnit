@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function testFail {
+	assertEquals 1 2
+}
