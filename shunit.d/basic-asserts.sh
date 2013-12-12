@@ -154,3 +154,37 @@ assertNotMatches () {
 		pass
 	fi
 }
+
+#Tests if a number is close to another
+#
+# Params:
+#    $1 <-- A number to be tested
+#    $2 <-- Expected value
+#    $3 <-- Error margin
+assertCloseTo () {
+	lower_bound=`expr $2 - $3`
+	upper_bound=`expr $2 + $3`
+	if [ '(' "$1" -ge "$lower_bound" ')' -a '(' "$1" -le "$upper_bound" ')' ]
+	then
+		pass
+	else
+		fail "$1 not in range [ $lower_bound - $upper_bound ]"
+	fi
+}
+
+#Tests if a number is NOT close to another
+#
+# Params:
+#    $1 <-- A number to be tested
+#    $2 <-- Expected value
+#    $3 <-- Error margin
+assertNotCloseTo () {
+        lower_bound=`expr $2 - $3`
+        upper_bound=`expr $2 + $3`
+        if [ '(' "$1" -ge "$lower_bound" ')' -a '(' "$1" -le "$upper_bound" ')' ]
+        then
+		fail "$1 in range [ $lower_bound - $upper_bound ]"
+        else
+		pass
+        fi
+}

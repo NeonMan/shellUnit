@@ -45,3 +45,11 @@ function testMatches {
 function testNotMatches {
 	assertNotMatches "[0-9]-[A-Z]" "ASDF-1234"
 }
+
+function testCloseTo {
+        assertCloseTo 9 10 1
+}
+
+function testNotCloseTo {
+	assertNotCloseTo 10 5 1
+}
