@@ -44,15 +44,23 @@ SHELL = "/bin/bash"
 SHUNIT_DIR = "./shunit.d/"
 SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'tests.sh',  'utils.sh')
 
+#Prints to console, with colours
+def print_colored(msg, colour=None, bold=True):
+  colours = {'red':'37;41', 'green':'37;42', 'yellow':'33;40'}
+  if colour==None:
+    print(msg)
+  else:
+    print('\033[%sm\033[1m%s\033[0m' % (colours[colour], msg))
+
 #Print an error, vervosity must be at least 0
 def print_error(msg):
   if VERBOSE_LEVEL >= 0:
-    print("[ERROR] %s" % msg)
+    print_colored("[ERROR] %s" % msg, 'red')
 
 #Print a warning, vervosity must be at least 2
 def print_warning(msg):
   if VERBOSE_LEVEL >= 2:
-    print("[WARNING] %s" % msg)
+    print_colored("[WARNING] %s" % msg, 'yellow')
 
 #Print an info message, vervosity must be at least 3
 def print_info(msg):
@@ -65,9 +73,9 @@ def print_debug(msg, level=0):
     print("[DBG%d] %s" % (level, msg))
 
 #Print a message, vervosity must be at least 1
-def print_message(msg):
+def print_message(msg, colour=None):
   if VERBOSE_LEVEL >= 1:
-    print(msg)
+    print_colored(msg, colour)
 
 #Show usage and help
 def show_help(exec_name):
@@ -117,18 +125,18 @@ def show_results(csv_file, test_time):
       current_test = line [1]
       assert_count = 0
       fail_count = 0
-      print_message("Test <%s> completed in %fs:" % (current_test, test_time))
+      print_message("Test <%s> completed in %fs:" % (current_test, test_time), 'yellow')
     if line[3] == 'OK':
-      print_message("  Assert @%s: OK" % line[2])
+      print_message("  Assert @%s: OK" % line[2], 'green')
       assert_count = assert_count + 1
     else:
-      print_message("  Assert @%s: FAIL (%s)" % (line[2], line[4]))
+      print_message("  Assert @%s: FAIL (%s)" % (line[2], line[4]), 'red')
       assert_count = assert_count + 1
       fail_count = fail_count + 1
   if fail_count == 0:
-    print_message("All tests from <%s> OK" % test_file)
+    print_message("All tests from <%s> OK" % test_file, 'green')
   else:
-    print_message("A test from <%s> has failed" % test_file)
+    print_message("A test from <%s> has failed" % test_file, 'red')
 
 #Run a test file
 def run_test(path):
@@ -190,7 +198,7 @@ def run_test(path):
     time.sleep(0.1)
     sh.wait()
 
-  show_results(tmp_result, end_time)
+  show_results(tmp_result, (end_time - start_time))
 
   #Cleanup temporary directory
   #tmp_dir.cleanup()
@@ -225,4 +233,4 @@ if __name__ == '__main__':
     start_test(sys.argv[1])
   else:
     show_help(sys.argv[0])
-  print("FINISHED!")
+

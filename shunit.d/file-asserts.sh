@@ -8,7 +8,7 @@
 assertFileContains () {
 	if [[ `grep "$2" $1` = "" ]]
 	then
-		fail "$current_test: expect '$1' to contain '$2'"
+		fail "expected '$1' to contain '$2'"
 	else
 		pass
 	fi

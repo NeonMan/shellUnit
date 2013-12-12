@@ -7,7 +7,7 @@ assertTrue () {
 	then
 		pass
 	else
-		fail "$current_test: expression is false"
+		fail "expression is false"
 	fi
 }
 
@@ -18,7 +18,7 @@ assertTrue () {
 assertTrue () {
         if [[ $1 ]]
         then
-                fail "$current_test: expression is true"
+                fail "expression is true"
         else
                 pass
         fi
@@ -35,7 +35,7 @@ assertEquals () {
 	then
 		pass
 	else
-		fail "$current_test: expected '$1' but found '$2'"
+		fail "expected '$1' but found '$2'"
 	fi
 }
 
@@ -47,7 +47,7 @@ assertEquals () {
 assertNotEquals () {
 	if [ "$1" == "$2" ]
 	then
-		fail "$current_test: expected NOT to be '$1' but found '$2'"
+		fail "expected NOT to be '$1' but found '$2'"
 	else
 		pass
 	fi
@@ -63,7 +63,7 @@ assertGreaterThan () {
 	then
 		pass
 	else
-		fail "$current_test: expect '$2' to be greater than '$1'"
+		fail "expected '$2' to be greater than '$1'"
 	fi
 }
 
@@ -75,7 +75,7 @@ assertGreaterThan () {
 assertNotGreaterThan () {
 	if [ "$1" -gt "$2" ]
 	then
-		fail "$current_test: expect '$2' NOT to be greater than '$1'"
+		fail "expected '$2' NOT to be greater than '$1'"
 	else
 		pass
 	fi
@@ -100,7 +100,7 @@ assertLessThan () {
         then
                 pass
         else
-                fail "$current_test: expect '$2' to be less than '$1'"
+                fail "expected '$2' to be less than '$1'"
         fi
 }
 
@@ -112,7 +112,7 @@ assertLessThan () {
 assertNotLessThan () {
         if [ "$1" -lt "$2" ]
         then
-                fail "$current_test: expect '$2' NOT to be less than '$1'"
+                fail "expected '$2' NOT to be less than '$1'"
         else
                 pass
         fi
@@ -137,7 +137,7 @@ assertMatches () {
 	then
 		pass
 	else
-		fail "$current_test: expect '$2' to match regular expression '$1'"
+		fail "expected '$2' to match regular expression '$1'"
 	fi
 }
 
@@ -149,7 +149,7 @@ assertMatches () {
 assertNotMatches () {
 	if [[ "$2" =~ $1 ]]
 	then
-		fail "$current_test: expect '$2' to NOT match regular expression '$1'"
+		fail "expected '$2' to NOT match regular expression '$1'"
 	else
 		pass
 	fi
