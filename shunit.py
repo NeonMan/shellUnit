@@ -99,12 +99,36 @@ def show_results(csv_file, test_time):
   lines = []
   #Extract info from the result CSV file
   with open(csv_file, 'r') as f:
-    csv_reader = csv.reader(f, ',', "¿")
+    csv_reader = csv.reader(f)
     for row in csv_reader:
       lines.append(row)
 
+  if len(lines) == 0:
+    print_warning("No test results")
+    return
+
   test_file = lines[0][0]
-  print("Test file: %s" % test_file)  
+  current_test = ''
+  assert_count = 0
+  fail_count = 0
+  for line in lines:
+    if current_test != line [1]:
+      #Prepare state for a new test
+      current_test = line [1]
+      assert_count = 0
+      fail_count = 0
+      print_message("Test <%s> completed in %fs:" % (current_test, test_time))
+    if line[3] == 'OK':
+      print_message("  Assert @%s: OK" % line[2])
+      assert_count = assert_count + 1
+    else:
+      print_message("  Assert @%s: FAIL (%s)" % (line[2], line[4]))
+      assert_count = assert_count + 1
+      fail_count = fail_count + 1
+  if fail_count == 0:
+    print_message("All tests from <%s> OK" % test_file)
+  else:
+    print_message("A test from <%s> has failed" % test_file)
 
 #Run a test file
 def run_test(path):
@@ -120,8 +144,7 @@ def run_test(path):
 
   #export test file name
   os.putenv('SHU_TEST_FILE', path)
-
-  print_message("Running test file <%s>" % path)
+  print_info("Running test file <%s>" % path)
 
   #Get a list of all the tests contained in the testfile
   tests = extract_tests(path)
@@ -158,11 +181,7 @@ def run_test(path):
 
   #end time in seconds
   end_time = time.time()
-  print_message("Test file completed in %f seconds" % (end_time - start_time))
-  #show_results(tmp_result, end_time)
-
-  #print csv file
-  sh.stdin.write(bytes("cat $SHU_TMP_RESULT\n", 'utf-8'))
+  print_info("Test file completed in %f seconds" % (end_time - start_time))
 
   #Wait for test to end
   if sh.poll() == None:
@@ -170,6 +189,8 @@ def run_test(path):
     sh.stdin.close()
     time.sleep(0.1)
     sh.wait()
+
+  show_results(tmp_result, end_time)
 
   #Cleanup temporary directory
   #tmp_dir.cleanup()
