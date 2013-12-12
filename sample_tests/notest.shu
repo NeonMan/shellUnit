@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function not_a_test {
+
+}

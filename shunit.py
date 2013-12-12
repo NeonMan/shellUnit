@@ -36,6 +36,7 @@ import os.path
 import os
 import subprocess
 import time
+import csv
 
 #Default level 1 (only errors and messages)
 VERBOSE_LEVEL = 1
@@ -94,16 +95,41 @@ def extract_tests(path):
           rv.append(name)
   return rv
 
+def show_results(csv_file, test_time):
+  lines = []
+  #Extract info from the result CSV file
+  with open(csv_file, 'r') as f:
+    csv_reader = csv.reader(f, ',', "¿")
+    for row in csv_reader:
+      lines.append(row)
+
+  test_file = lines[0][0]
+  print("Test file: %s" % test_file)  
+
 #Run a test file
 def run_test(path):
   #setup a temporary dir to store test results
-  tmp_dir = tempfile.TemporaryDirectory("-shunit")
-  os.putenv('SHU_TMP_DIR', tmp_dir.name)
+  tmp_dir =  tempfile.mkdtemp('', "shunit-") #tempfile.TemporaryDirectory("-shunit")
+  tmp_result = os.path.join(tmp_dir, 'result.csv')
+  os.putenv('SHU_TMP_DIR', tmp_dir)
+  os.putenv('SHU_TMP_RESULT', tmp_result)
+
+  #'touch' result.csv
+  f = open(tmp_result, 'wb')
+  f.close()
 
   #export test file name
   os.putenv('SHU_TEST_FILE', path)
 
   print_message("Running test file <%s>" % path)
+
+  #Get a list of all the tests contained in the testfile
+  tests = extract_tests(path)
+  if len(tests) == 0:
+    print_error("No tests found on file <%s>" % path)
+    return
+
+
   #spawn a shell instance
   sh = subprocess.Popen(SHELL, stdin=subprocess.PIPE)
   #load the framework
@@ -115,9 +141,6 @@ def run_test(path):
     sh.stdin.write(bytes(". %s\n" % sh_path, 'utf-8'))
   #Start time in seconds
   start_time = time.time()
-
-  #Get a list of all the tests contained in the testfile
-  tests = extract_tests(path)
 
   #Load test file into the context
   with open(path, 'r') as sh_file:
@@ -133,17 +156,23 @@ def run_test(path):
      sh.stdin.write(bytes("SHU_TEST_NAME=%s\n" % t, 'utf-8'))
      sh.stdin.write(bytes("%s\n" % t, 'utf-8'))
 
-  #Wait for test to end
-  if sh.poll() == None:
-    print_debug("Waiting for spawned shell to terminate <%s>" % path)
-    sh.stdin.write(bytes("exit\n", 'utf-8'))
-    sh.wait()
   #end time in seconds
   end_time = time.time()
   print_message("Test file completed in %f seconds" % (end_time - start_time))
+  #show_results(tmp_result, end_time)
+
+  #print csv file
+  sh.stdin.write(bytes("cat $SHU_TMP_RESULT\n", 'utf-8'))
+
+  #Wait for test to end
+  if sh.poll() == None:
+    print_debug("Waiting for spawned shell to terminate <%s>" % path)
+    sh.stdin.close()
+    time.sleep(0.1)
+    sh.wait()
 
   #Cleanup temporary directory
-  tmp_dir.cleanup()
+  #tmp_dir.cleanup()
 
 #Run all test files from a directory
 def run_directory(path):
