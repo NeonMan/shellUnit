@@ -226,6 +226,15 @@ def start_test(path):
 
 #Main procedure
 if __name__ == '__main__':
+  #Check if shunit is available at default location
+  #if not, try current directory
+  #otherwise, fail
+  if not os.path.exists(SHUNIT_DIR):
+    SHUNIT_DIR="./shunit.d/"
+    if not os.path.exists(SHUNIT_DIR):
+      print_error("Shunit framework directory (shunit.d) not found")
+      exit(-1)
+    
   #Read command line arguments
   if len(sys.argv) == 2:
     start_test(sys.argv[1])
