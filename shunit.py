@@ -41,7 +41,7 @@ import csv
 #Default level 1 (only errors and messages)
 VERBOSE_LEVEL = 1
 SHELL = "/bin/bash"
-SHUNIT_DIR = "./shunit.d/"
+SHUNIT_DIR = "/usr/share/shunit.d/"
 SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'tests.sh',  'utils.sh')
 
 #Prints to console, with colours
@@ -227,9 +227,7 @@ def start_test(path):
 #Main procedure
 if __name__ == '__main__':
   #Read command line arguments
-  if len(sys.argv) == 1:
-    start_test("./")
-  elif len(sys.argv) == 2:
+  if len(sys.argv) == 2:
     start_test(sys.argv[1])
   else:
     show_help(sys.argv[0])

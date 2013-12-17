@@ -39,7 +39,11 @@ function testZero {
 }
 
 Installing:
-Shell Unit does not provide an installation feature yet
+    Shunit can be installed using Make by running:
+        make install
+
+    Uninstall can be done by running:
+        make remove
 
 Contact:
 Found a bug? Need a feature? drop by the repository at:
