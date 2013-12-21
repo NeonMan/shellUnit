@@ -15,7 +15,7 @@ assertTrue () {
 #
 # Params:
 #    $1 <-- A '[[' expression string
-assertTrue () {
+assertFalse () {
         if [[ $1 ]]
         then
                 fail "expression is true"
@@ -125,34 +125,6 @@ assertNotLessThan () {
 #    $2 <-- An integer
 assertLessThanOrEqualTo () {
 	assertNotGreaterThan $1 $2
-}
-
-#Tests if param 1 (string) matches the param 2 regexp
-#
-# Params:
-#    $1 <-- A regular expression
-#    $2 <-- A string
-assertMatches () {
-	if [[ "$2" =~ $1 ]]
-	then
-		pass
-	else
-		fail "expected '$2' to match regular expression '$1'"
-	fi
-}
-
-#Tests if param 1 (string) does not match the param 2 regexp
-#
-# Params:
-#    $1 <-- A string
-#    $2 <-- A regular expression
-assertNotMatches () {
-	if [[ "$2" =~ $1 ]]
-	then
-		fail "expected '$2' to NOT match regular expression '$1'"
-	else
-		pass
-	fi
 }
 
 #Tests if a number is close to another
