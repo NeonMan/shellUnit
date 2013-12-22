@@ -1,0 +1,82 @@
+<h1>Shell Unit</h1>
+
+<h2>A testing framework for csh and bash-like shells</h2>
+
+<h3>Usage:</h3>
+
+<p>Shell Unit is invoked using the shunit executable, the command-line
+parameters are as follows:</p>
+
+<blockquote>
+<pre><code>shunit [TEST_FILE|TEST_DIRECTORY]
+</code></pre>
+</blockquote>
+
+<p>for example, running the tests contained in the file 'sampletest.shu' is:</p>
+
+<blockquote>
+<pre><code>shunit sampletest.shu
+</code></pre>
+</blockquote>
+
+<p>If you need to run <em>all</em> the tests on a directory simply invoke shunit
+with the directory as a parameter, it will run all the tests contained in
+every .shu file. Example:</p>
+
+<blockquote>
+<pre><code>shunit ./path/to/dir
+</code></pre>
+</blockquote>
+
+<h3>Creating a test:</h3>
+
+<p>Shell Unit tests scripts by parsing and executting .shu files, which are
+written in any of the supported unix shells (csh/bash). The test file
+itself must load the script to be tested. Example.</p>
+
+<h4>Sript to be tested:</h4>
+
+<blockquote>
+<pre><code>#!/bin/bash
+#sample.sh -- Script to be tested
+function zero {
+  return 0
+}
+</code></pre>
+</blockquote>
+
+<h4>Test script</h4>
+
+<blockquote>
+<pre><code>#!/bin/bash
+#sample.sh -- Test file fopr sample.sh
+. sample.sh
+
+function testZero {
+  #Call function to be tested
+  zero
+  #Check return value
+  assertEquals $? 0
+}
+</code></pre>
+</blockquote>
+
+<h3>Installing:</h3>
+
+<p>Shunit can be installed using Make by running:</p>
+
+<blockquote>
+<pre><code>make install
+</code></pre>
+</blockquote>
+
+<p>Uninstall can be done by running:</p>
+
+<blockquote>
+<pre><code>make remove
+</code></pre>
+</blockquote>
+
+<h3>Contact:</h3>
+
+<p>Found a bug? Need a feature? drop by the <a href="https://github.com/NeonMan/shellUnit">repository at github</a>.</p>
