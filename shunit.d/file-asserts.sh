@@ -23,7 +23,7 @@ assertOwnerIs () {
 	SHU_USER=""
 	if [[ "$2" =~ [0-9][0-9]* ]]
 	then
-		SHU_USER=`shu_getUser "$2"`
+		SHU_USER=`shu_userName "$2"`
 	else
 		SHU_USER="$2"
 	fi
@@ -46,7 +46,7 @@ assertOwnerIsNot () {
 	SHU_USER=""
 	if [[ "$2" =~ [0-9][0-9]* ]]
 	then
-		SHU_USER=`shu_getUser "$2"`
+		SHU_USER=`shu_userName "$2"`
 	else
 		SHU_USER="$2"
 	fi
@@ -59,3 +59,50 @@ assertOwnerIsNot () {
 		pass
 	fi
 }
+
+#Test if a file is owned by a group, either by name or GID
+#
+# Params:
+#     $1 <-- A path
+#     $2 <-- a group name | GID
+assertGroupIs () {
+	SHU_GROUP=""
+	if [[ "$2" =~ [0-9][0-9]* ]]
+	then
+		SHU_GROUP=`shu_userGroup "$2"`
+	else
+		SHU_GROUP="$2"
+	fi
+	SHU_FGRP=`shu_fileGroup "$1"`
+
+	if [ "$SHU_FOWNER" = "$SHU_USER" ]
+	then
+		pass
+	else
+		fail "Expected group <$SHU_USER> but found <$SHU_FOWNER>"
+	fi
+}
+
+#Test if a file is owned by a group, either by name or GID
+#
+# Params:
+#     $1 <-- A path
+#     $2 <-- a group name | GID
+assertGroupIsNot () {
+	SHU_GROUP=""
+	if [[ "$2" =~ [0-9][0-9]* ]]
+	then
+		SHU_GROUP=`shu_userGroup "$2"`
+	else
+		SHU_GROUP="$2"
+	fi
+	SHU_FGRP=`shu_fileGroup "$1"`
+
+	if [ "$SHU_FOWNER" = "$SHU_USER" ]
+	then
+		fail "Expected group not to be <$SHU_USER>"
+	else
+		pass
+	fi
+}
+
