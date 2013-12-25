@@ -42,7 +42,7 @@ import csv
 VERBOSE_LEVEL = 1
 SHELL = "/bin/bash"
 SHUNIT_DIR = "/usr/share/shunit.d/"
-SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'tests.sh',  'utils.sh')
+SHUNIT_FILES = ('assertions.sh',  'basic-asserts.sh',  'colors.sh',  'file-asserts.sh',  'setup-shell.sh',  'tests.sh',  'utils.sh', 'string-asserts.sh', 'filesystem-asserts.sh')
 
 #Prints to console, with colours
 def print_colored(msg, colour=None, bold=True):
