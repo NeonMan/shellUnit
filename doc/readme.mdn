@@ -1,0 +1,61 @@
+Shell Unit
+==========
+
+A testing framework for csh and bash-like shells
+------------------------------------------------
+
+### Usage:
+
+Shell Unit is invoked using the shunit executable, the command-line
+parameters are as follows:
+
+>     shunit [TEST_FILE|TEST_DIRECTORY]
+
+for example, running the tests contained in the file 'sampletest.shu' is:
+
+>     shunit sampletest.shu
+
+If you need to run *all* the tests on a directory simply invoke shunit
+with the directory as a parameter, it will run all the tests contained in
+every .shu file. Example:
+
+>     shunit ./path/to/dir
+
+### Creating a test:
+Shell Unit tests scripts by parsing and executting .shu files, which are
+written in any of the supported unix shells (csh/bash). The test file
+itself must load the script to be tested. Example.
+
+#### Sript to be tested:
+
+>     #!/bin/bash
+>     #sample.sh -- Script to be tested
+>     function zero {
+>         return 0
+>     }
+
+#### Test script
+
+>     #!/bin/bash
+>     #sample.sh -- Test file fopr sample.sh
+>     . sample.sh
+> 
+>     function testZero {
+>         #Call function to be tested
+>         zero
+>         #Check return value
+>         assertEquals $? 0
+>     }
+
+### Installing:
+
+Shunit can be installed using Make by running:
+
+>     make install
+
+Uninstall can be done by running:
+>     make remove
+
+### Contact:
+
+Found a bug? Need a feature? drop by the [repository at github](https://github.com/NeonMan/shellUnit).
