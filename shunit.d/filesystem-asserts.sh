@@ -102,3 +102,31 @@ assertIsNotLink () {
 	fi
 }
 
+#Test if two paths point to the same inode (soft and hard links)
+#
+# Params:
+#     $1 <-- A path
+#     $2 <-- Another path
+assertSameInode () {
+	if [ "$1" -ef "$2" ]
+	then
+		pass
+	else
+		fail "'$1' and '$2' point to different inodes"
+	fi
+}
+
+#Test if two paths do NO point to the same inode (soft and hard links)
+#
+# Params:
+#     $1 <-- A path
+#     $2 <-- Another path
+assertNotSameInode () {
+	if [ ! '(' "$1" -ef "$2" ')' ]
+	then
+		pass
+	else
+		fail "'$1' and '$2' point to the same inode"
+	fi
+}
+
