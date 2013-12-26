@@ -1,4 +1,0 @@
-# switch to regexp syntax.
-syntax: regexp
-^\.git/
-^\.gitignore$
