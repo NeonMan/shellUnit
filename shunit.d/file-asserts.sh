@@ -3,12 +3,25 @@
 # Params:
 #    $1 <-- A file
 #    $2 <-- A regular expression
-#
-# @bug test wether the file exists (and is a normal file) to attempt the test
-assertFileContains () {
-	if [[ `grep "$2" $1` = "" ]]
+assertContains () {
+	if grep -q -F "$2" "$1"
 	then
-		fail "expected '$1' to contain '$2'"
+		pass
+	else
+		fail "Expected file to contain <$2>"
+	fi
+}
+
+#Test if a file contains a line matching a regexp
+#
+# Params:
+#    $1 <-- A file
+#    $2 <-- A regular expression
+assertNotContains () {
+	if grep -q -F "$2" "$1"
+	then
+		fail "Expected file to contain <$2>"
+
 	else
 		pass
 	fi
