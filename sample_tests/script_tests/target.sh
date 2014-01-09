@@ -25,11 +25,15 @@ else
 	then
 		addition "$2" "$3"
 		echo "$?"
-	else if [ $1 == 'mul' ]
-	then
-		multiplication "$2" "$3"
-		echo "$?"
-	fi
+	else
+		if [ $1 == 'mul' ]
+		then
+			multiplication "$2" "$3"
+			echo "$?"
+		#Uncomment to make the test pass
+		#else
+		#	usage
+		fi
 	fi
 fi
 
