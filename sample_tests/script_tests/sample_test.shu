@@ -1,0 +1,19 @@
+shu_loadTarget target.sh
+
+testAddition () {
+	addition 1 2
+	assertEquals "$SHU_RV" 3
+}
+
+testMultiplication () {
+	multiplication 5 8
+	assertEquals "$SHU_RV" 40
+}
+
+testMain () {
+	assertMatches "^Usage" `shu_main`
+	assertMatches "^Usage" `shu_main asd 1 5`
+	assertMatches "^Usage" `shu_main sum 2 2 4`
+	assertEquals  "7" `shu_main sum 5 2`
+	assertEquals  "8" `shu_main mul 4 2`
+}

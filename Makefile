@@ -10,7 +10,6 @@ install:
 	mkdir /usr/share/doc/shunit
 	cp -rf ./sample_tests /usr/share/doc/shunit
 	cp COPYING /usr/share/doc/shunit
-	cp README /usr/share/doc/shunit
 	cp ./doc/* /usr/share/doc/shunit
 	cp Makefile /usr/share/doc/shunit
 	cp shunit.py /usr/bin/

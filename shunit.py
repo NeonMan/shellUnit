@@ -177,6 +177,7 @@ def run_test(path):
   with open(path, 'r') as sh_file:
     current_line = 1
     for l in sh_file.readlines():
+      sh.stdin.write(bytes('SHU_RV="$?"\n', 'utf-8')) #Make return values available
       sh.stdin.write(bytes("SHU_TEST_LINE=%d\n" % current_line, 'utf-8'))
       current_line = current_line + 1
       sh.stdin.write(bytes("%s\n" % l, 'utf-8'))
