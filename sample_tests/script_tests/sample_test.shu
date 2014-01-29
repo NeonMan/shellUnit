@@ -1,5 +1,14 @@
 shu_loadTarget target.sh
 
+setup () {
+
+}
+
+teardown () {
+
+}
+
+
 testAddition () {
 	addition 1 2
 	assertEquals "$SHU_RV" 3

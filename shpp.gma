@@ -1,0 +1,81 @@
+! ----------------------------------------------------------------------------
+!  Begining and end of file macros
+! ----------------------------------------------------------------------------
+
+! Begining of data
+\A=\# -- Framework setup begin --\n
+
+! -- Initialize the preprocessor variables
+\A=@bind{shpp_line;1}
+\A=@bind{shpp_setup;\# -- No setup --}
+\A=@bind{shpp_teardown;\# -- No teardown --}
+\A=@bind{shpp_tests;}
+\A=@bind{shpp_shunit_path;/usr/share/shunit.d/}
+
+! -- Load the framework files
+\A=\n@read{@makepath{@var{shpp_shunit_path};assertions.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};basic-asserts.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};colors.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};file-asserts.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};filesystem-asserts.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};string-asserts.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};tests.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};utils.sh;}}\n
+
+! -- Load framework setup files and execute initial config
+\A=\n@read{@makepath{@var{shpp_shunit_path};setup-shell.sh;}}\nsetup_alternatives\n
+
+! -- End of framework setup
+\A=\# -- Framework setup end --\n
+
+! End of data
+!   Dispatch the tests here
+\Z=\n\#End of data\n\#tests: @var{shpp_tests}\n
+
+! ----------------------------------------------------------------------------
+!  Generic rules, apply on top level domain
+! ----------------------------------------------------------------------------
+
+! For each line, regardless of where it is
+!  * add SHU_RV=$?
+!  * add SHU_TEST_LINE=shpp_line
+*\n=$0SHU_RV=\$\?\nSHU_LINE=@var{shpp_line;0}\n@incr{shpp_line};
+
+! test declaration
+test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\n\}@append{shpp_tests;test$1\;}
+
+! setup declaration
+setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}
+
+! teardown declaration
+teardown\ \(\)\ \{<teardown>\}=teardown \(\) \{$1\}@bind{shpp_teardown;teardown}
+
+! target declaration
+shu_loadTarget\ *\n=shu_main\ \(\)\ \{\n@read{$1}\n\}\n
+
+! ----------------------------------------------------------------------------
+!  <test> domain
+! ----------------------------------------------------------------------------
+
+! Test applies every rule in top level domain
+test::
+! Disallow nested tests
+test:test<A>\ \(\)\ \{<test>\}=$0
+
+! ----------------------------------------------------------------------------
+!  <setup> domain
+! ----------------------------------------------------------------------------
+
+! Inherit tld
+setup::
+! Disallow nested setup (redundant)
+setup:setup\ \(\)\ \{<setup>\}=$0
+
+! ----------------------------------------------------------------------------
+!  <teardown> domain
+! ----------------------------------------------------------------------------
+
+! Inherit tld
+teardown::
+! Disallow nested teardown (redundant)
+teardown:teardown\ \(\)\ \{<teardown>\}=$0
