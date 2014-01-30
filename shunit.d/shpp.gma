@@ -49,7 +49,10 @@
 *\n=$0SHU_RV=\$\?\nSHU_TEST_LINE=@var{shpp_line;0}\n@incr{shpp_line};
 
 ! test declaration
-test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\nshu_newtest\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\n\}@append{shpp_tests;test$1\n}
+!  * Set SHU_TEST_NAME at the begining
+!  * Set SHU_TEST_INIT_TIME at the begining
+!  * Set SHU_TEST_END_TIME at the end
+test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\nSHU_TEST_INIT_TIME=`date +"%s%3N"`\nshu_newtest\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\nSHU_TEST_END_TIME=`date +"%s%3N"`\n\}@append{shpp_tests;test$1\n}
 
 ! setup declaration
 setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}

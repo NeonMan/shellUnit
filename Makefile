@@ -13,13 +13,18 @@ install:
 	cp ./doc/* /usr/share/doc/shunit
 	cp Makefile /usr/share/doc/shunit
 	cp shunit.sh /usr/bin/
+	cp shpp.sh /usr/bin/
 	ln -s ./shunit.sh /usr/bin/shunit
+	ln -s ./shpp.sh /usr/bin/shpp
 
 remove:
 	-rm -rfv /usr/share/shunit.d
 	-rm -rfv /usr/share/doc/shunit
 	-rm /usr/bin/shunit
 	-rm /usr/bin/shunit.sh
+	-rm /usr/bin/shpp
+	-rm /usr/bin/shpp.sh
+
 
 #
 #Documentation
