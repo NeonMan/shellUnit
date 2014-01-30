@@ -1,4 +1,4 @@
-ccflags = -Wall
+ccflags = -Wall -Werror
 
 #Make all targets EXCEPT pdf since pdflatex is freakin' huge
 simple: doc exec

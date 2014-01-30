@@ -48,7 +48,9 @@ using namespace std;
 //Globals (forgive me)
 long ini_time = LONG_MAX;
 long end_time = LONG_MIN;
-int err_count = 0;
+int err_count    = 0;
+int test_count   = 0;
+int assert_count = 0;
 
 /*
  * Test lines have the format:
@@ -56,6 +58,7 @@ int err_count = 0;
  */
 void parse_test(string line){
   cout<<COLOR_YELLOW_FG<<"TEST: "<<line.substr(line.rfind(",")+1)<<COLOR_RESET<<endl;
+  test_count++;
 }
 
 /*
@@ -89,6 +92,7 @@ void parse_assert(string line){
     err_count++;
   }
   cout<<COLOR_RESET<<endl;
+  assert_count++;
 }
 
 void parse_line(string line){
@@ -110,11 +114,15 @@ int main(int argc, char** argv){
   cout<<COLOR_YELLOW_FG;
   cout<<"-----------------------------------"<<endl;
   cout<<" All test completed in "<<end_time-ini_time<<"ms"<<endl;
+  if(test_count==0)
+    cout<<" Warning: No tests run!"<<endl;
+  if(assert_count==0)
+    cout<<" Warning: No asserts run!"<<endl;
   if(err_count){
     cout<<" "<<COLOR_RED<<err_count<<" asserts failed."<<COLOR_YELLOW_FG<<endl;
   }
   else{
-    cout<<" "<<COLOR_GREEN<<"Al asserts passed."<<COLOR_YELLOW_FG<<endl;
+    cout<<" "<<COLOR_GREEN<<"All asserts passed."<<COLOR_YELLOW_FG<<endl;
   }
   cout<<"-----------------------------------";
   cout<<COLOR_RESET<<endl;
