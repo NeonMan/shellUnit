@@ -1,8 +1,10 @@
+ccflags = -Wall
+
 #Make all targets EXCEPT pdf since pdflatex is freakin' huge
-simple: doc
+simple: doc exec
 
 #Make all targets
-all: doc pdf
+all: simple pdf
 
 install:
 	mkdir /usr/share/shunit.d
@@ -16,6 +18,7 @@ install:
 	cp shpp.sh /usr/bin/
 	ln -s ./shunit.sh /usr/bin/shunit
 	ln -s ./shpp.sh /usr/bin/shpp
+	cp shunit-out-pretty /usr/bin
 
 remove:
 	-rm -rfv /usr/share/shunit.d
@@ -24,7 +27,21 @@ remove:
 	-rm /usr/bin/shunit.sh
 	-rm /usr/bin/shpp
 	-rm /usr/bin/shpp.sh
+	-rm /usr/bin/shunit-out-pretty
+clean:
+	-rm ./doc/*.html
+	-rm ./doc/*.pdf
+	-rm ./doc/*.epub
+	-rm *.o
+	-rm shunit-out-pretty
 
+#
+#Executables
+#
+exec: shunit-out-pretty
+
+shunit-out-pretty: shunit-out-pretty.cpp
+	c++  $(ccflags) -o shunit-out-pretty shunit-out-pretty.cpp
 
 #
 #Documentation
@@ -49,7 +66,3 @@ doc/readme.html: doc/readme.mdn
 doc/index.html: doc/index.mdn
 	markdown $^ > $@
 
-clean:
-	-rm ./doc/*.html
-	-rm ./doc/*.pdf
-	-rm ./doc/*.epub

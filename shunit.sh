@@ -1,4 +1,5 @@
 #!/bin/bash
+# See 'COPYING' for copyright info
 
 #Show shunit help
 #
@@ -21,7 +22,7 @@ output_cmd () {
 		echo ""
 	elif [ $SHU_OUT_MODE = 'pretty' ]
 	then
-		echo "shunit-pretty"
+		echo "shunit-out-pretty"
 	else
 		echo ""
 	fi

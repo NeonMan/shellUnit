@@ -1,2 +1,3 @@
 doc/**/*
 !doc/*.mdn
+shunit-out-pretty
