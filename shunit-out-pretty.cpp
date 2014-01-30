@@ -110,7 +110,7 @@ int main(int argc, char** argv){
   {
     parse_line(line);
   }
-  //Show timings
+  //Show timings and some extra info
   cout<<COLOR_YELLOW_FG;
   cout<<"-----------------------------------"<<endl;
   cout<<" All test completed in "<<end_time-ini_time<<"ms"<<endl;
@@ -122,7 +122,7 @@ int main(int argc, char** argv){
     cout<<" "<<COLOR_RED<<err_count<<" asserts failed."<<COLOR_YELLOW_FG<<endl;
   }
   else{
-    cout<<" "<<COLOR_GREEN<<"All asserts passed."<<COLOR_YELLOW_FG<<endl;
+    cout<<" "<<COLOR_GREEN<<"All assert(s) passed."<<COLOR_YELLOW_FG<<endl;
   }
   cout<<"-----------------------------------";
   cout<<COLOR_RESET<<endl;

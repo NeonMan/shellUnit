@@ -41,7 +41,7 @@ clean:
 exec: shunit-out-pretty
 
 shunit-out-pretty: shunit-out-pretty.cpp
-	c++  $(ccflags) -o shunit-out-pretty shunit-out-pretty.cpp
+	c++  $(ccflags) -o $@ $^
 
 #
 #Documentation
