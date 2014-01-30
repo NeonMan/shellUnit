@@ -8,6 +8,13 @@ normalizePath () {
 	echo $1 #$( cd "$( dirname $1 )" && pwd )/$( basename $1 )
 }
 
+#Called once just before a test is executed
+#
+# Params: None
+shu_newtest () {
+	echo "SHU,TEST,$SHU_TEST_NAME"
+}
+
 #Return a file owner
 #
 # Params:

@@ -1,9 +1,16 @@
 ! ----------------------------------------------------------------------------
+!  Command-line parsing
+! ----------------------------------------------------------------------------
+
+! Nothing to parse yet...
+
+! ----------------------------------------------------------------------------
 !  Begining and end of file macros
 ! ----------------------------------------------------------------------------
 
 ! Begining of data
 \A=\# -- Framework setup begin --\n
+\A=SHU_TEST_FILE\="\$0"
 
 ! -- Initialize the preprocessor variables
 \A=@bind{shpp_line;1}
@@ -30,7 +37,7 @@
 
 ! End of data
 !   Dispatch the tests here
-\Z=\n\#End of data\n\#tests: @var{shpp_tests}\n
+\Z=\n\#End of data\n@var{shpp_tests}\n
 
 ! ----------------------------------------------------------------------------
 !  Generic rules, apply on top level domain
@@ -39,10 +46,10 @@
 ! For each line, regardless of where it is
 !  * add SHU_RV=$?
 !  * add SHU_TEST_LINE=shpp_line
-*\n=$0SHU_RV=\$\?\nSHU_LINE=@var{shpp_line;0}\n@incr{shpp_line};
+*\n=$0SHU_RV=\$\?\nSHU_TEST_LINE=@var{shpp_line;0}\n@incr{shpp_line};
 
 ! test declaration
-test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\n\}@append{shpp_tests;test$1\;}
+test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\nshu_newtest\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\n\}@append{shpp_tests;test$1\n}
 
 ! setup declaration
 setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}
@@ -50,8 +57,17 @@ setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}
 ! teardown declaration
 teardown\ \(\)\ \{<teardown>\}=teardown \(\) \{$1\}@bind{shpp_teardown;teardown}
 
-! target declaration
-shu_loadTarget\ *\n=shu_main\ \(\)\ \{\n@read{$1}\n\}\n
+! Load target file. this rule inserth the code:
+!if . "target.sh" >/dev/null 2>/dev/null
+!then
+!#       Do nothing
+!        echo "" >/dev/null
+!else
+!        echo "Failed to load target"
+!        exit -1
+!fi
+!
+shu_loadTarget\ *\n=shu_main\ \(\)\ \{\n@read{$1}\n\}\nif . "$1" \>\/dev\/null 2\>\/dev\/null\;then echo "" \>\/dev\/null\;else echo "ERROR: Failed to load $1"\;exit -1\;fi\;\n
 
 ! ----------------------------------------------------------------------------
 !  <test> domain

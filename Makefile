@@ -12,14 +12,14 @@ install:
 	cp COPYING /usr/share/doc/shunit
 	cp ./doc/* /usr/share/doc/shunit
 	cp Makefile /usr/share/doc/shunit
-	cp shunit.py /usr/bin/
-	ln -s ./shunit.py /usr/bin/shunit
+	cp shunit.sh /usr/bin/
+	ln -s ./shunit.sh /usr/bin/shunit
 
 remove:
 	-rm -rfv /usr/share/shunit.d
 	-rm -rfv /usr/share/doc/shunit
 	-rm /usr/bin/shunit
-	-rm /usr/bin/shunit.py
+	-rm /usr/bin/shunit.sh
 
 #
 #Documentation

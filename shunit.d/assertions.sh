@@ -13,7 +13,7 @@ countAssert () {
 # Params: None
 pass () {
 	countAssert
-	echo "$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,OK" >> "$SHU_TMP_RESULT"
+	echo "SHU,ASSERT,$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,OK,"
 }
 
 #Increment assert count AND error count while showing a message.
@@ -22,6 +22,6 @@ pass () {
 #    $1 <-- The message to print
 fail () {
 	countAssert
-	echo "$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,FAIL,$1" >> "$SHU_TMP_RESULT"
+	echo "SHU,ASSERT,$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,FAIL,$1"
 	SHU_FAILED_ASSERTS=`expr $SHU_FAILED_ASSERTS + 1`
 }
