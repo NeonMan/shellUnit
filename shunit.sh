@@ -50,6 +50,23 @@ test_file () {
 	popd >/dev/null
 }
 
+#Run all .shu files from a directory
+#
+# Params:
+#     $1 <-- test dir
+test_dir () {
+	SHU_TEST_COUNT=0
+	pushd "$PWD" >/dev/null
+	cd "$1"
+	SHU_BASE="$PWD"
+	popd >/dev/null
+	for e in `ls "$1"| grep -i "\.shu$"`
+	do
+		test_file "$SHU_BASE/$e"
+		SHU_TEST_COUNT=`expr $SHU_TEST_COUNT + 1`
+	done
+}
+
 #Processes and tests the .shu file
 #
 # Params:
@@ -57,7 +74,7 @@ test_file () {
 run_test () {
 	if [ -d "$1" ]
 	then
-		echo "Directory unsupported yet"
+		test_dir "$1"
 	elif [ -f "$1" ]
 	then
 		test_file "$1"

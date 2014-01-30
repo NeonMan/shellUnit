@@ -2,42 +2,42 @@
 
 #This script will test the validity of the asserts themselves
 
-function testEquals {
+testEquals () {
 	assertEquals "2" 0
 }
 
-function testNotEquals {
+testNotEquals () {
 	assertNotEquals A A
 }
 
-function testGreaterThan {
+testGreaterThan () {
 	assertGreaterThan 1 1
 }
 
-function testNotGreaterThan {
+testNotGreaterThan () {
 	assertNotGreaterThan 6 3
 }
 
-function testLessThan {
+testLessThan () {
 	assertLessThan 5 1
 }
 
-function testNotLessThan {
+testNotLessThan () {
 	assertNotLessThan 3 5
 }
 
-function testMatches {
+testMatches () {
 	assertMatches "[0-9]-[A-Z]" "HELLO"
 }
 
-function testNotMatches {
+testNotMatches () {
 	assertNotMatches "[0-9]-[A-Z]" "1234-ASDF"
 }
 
-function testCloseTo {
+testCloseTo () {
         assertCloseTo 1 10 1
 }
 
-function testNotCloseTo {
+testNotCloseTo () {
 	assertNotCloseTo 4 5 1
 }

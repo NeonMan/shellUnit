@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function testMatches {
+testMatches () {
 	assertMatches ".*" "aaa"
 	assertMatches "abc" "abc"
 	assertMatches "a[bc]" "ab"
