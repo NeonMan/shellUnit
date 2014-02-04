@@ -3,7 +3,7 @@
 # Params:
 #    $1 <-- A '[[' expression string
 assertTrue () {
-	if [[ $1 ]]
+	if [ `expr $1` != '0' ]
 	then
 		pass
 	else
@@ -16,7 +16,7 @@ assertTrue () {
 # Params:
 #    $1 <-- A '[[' expression string
 assertFalse () {
-        if [[ $1 ]]
+        if [ `expr $1` = '0' ]
         then
                 fail "expression is true"
         else

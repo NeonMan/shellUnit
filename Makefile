@@ -58,7 +58,7 @@ pdf: doc/readme.pdf
 doc/readme.pdf: doc/readme.mdn
 	pandoc -f markdown $^ -o $@
 
-html: doc/index.html doc/readme.html htdoc
+html: doc/index.html doc/readme.html
 
 doc/readme.html: doc/readme.mdn
 	markdown $^ > $@
@@ -66,5 +66,5 @@ doc/readme.html: doc/readme.mdn
 doc/index.html: doc/index.mdn
 	markdown $^ > $@
 
-htdoc:
+quickstart:
 	cd doc && ./mkdoc.sh > doc.html && cd ..

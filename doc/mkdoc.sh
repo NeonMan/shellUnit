@@ -4,15 +4,15 @@ HEADER='<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>960 Grid System &mdash; Demo</title>
+<title>shellUnit &mdash; Quickstart</title>
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="css/text.css" />
 <link rel="stylesheet" href="css/960_24_col.css" />
 <!-- <link rel="stylesheet" href="css/demo.css" /> -->
+<link rel="stylesheet" href="css/shunit.css" />
 </head>
 <body>
-<div class="container_24">
-  <!-- Header -->
+<div id="header" class="container_24">
   <div class="grid_24">
     <p>
       shUnit.
@@ -22,7 +22,11 @@ HEADER='<!DOCTYPE html>
     </p>
   </div>'
 
-FOOTER='</div>
+FOOTER='
+  <div id="footer" class="grid_24">
+    <p>Footer</p>
+  </div>
+</div>
 </body>'
 
 #Make a documentation row, two 960gs columns.
@@ -39,10 +43,10 @@ mkrow () {
   then
     COL1="$3"
   fi
-  echo '<div class="grid_11">'
+  echo '<div id="comment" class="grid_10">'
   echo "$COL1"
   echo '</div>'
-  echo '<div class="grid_13">'
+  echo '<div id="code" class="grid_14">'
   echo "$COL2"
   echo '</div>'
   echo '<div class="clear"></div>'
