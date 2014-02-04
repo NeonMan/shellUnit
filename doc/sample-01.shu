@@ -1,0 +1,7 @@
+#sample-01.shu
+testSimpleTest () {
+	#Add test here
+	#Some shells (bash) don't like empty functions
+	#so we add an echo here
+	echo "Test!"
+}

@@ -1,0 +1,17 @@
+#sample_test.shu
+
+setup () {
+	#Test setup goes here:
+}
+
+teardown () {
+	#Test teardown goes here
+}
+
+testOne () {
+	#A test
+}
+
+testTwo () {
+	#Another test
+}

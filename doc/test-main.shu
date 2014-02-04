@@ -1,0 +1,4 @@
+testMain () {
+	shu_main "A parameter" "another param"
+	#Asserts below this line...
+}
