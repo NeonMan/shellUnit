@@ -12,7 +12,7 @@ install:
 	mkdir /usr/share/doc/shunit
 	cp -rf ./sample_tests /usr/share/doc/shunit
 	cp COPYING /usr/share/doc/shunit
-	cp ./doc/* /usr/share/doc/shunit
+	cp -rf ./doc/* /usr/share/doc/shunit
 	cp Makefile /usr/share/doc/shunit
 	cp shunit.sh /usr/bin/
 	cp shpp.sh /usr/bin/
@@ -58,7 +58,7 @@ pdf: doc/readme.pdf
 doc/readme.pdf: doc/readme.mdn
 	pandoc -f markdown $^ -o $@
 
-html: doc/index.html doc/readme.html
+html: doc/index.html doc/readme.html htdoc
 
 doc/readme.html: doc/readme.mdn
 	markdown $^ > $@
@@ -66,3 +66,5 @@ doc/readme.html: doc/readme.mdn
 doc/index.html: doc/index.mdn
 	markdown $^ > $@
 
+htdoc:
+	cd doc && ./mkdoc.sh > doc.html && cd ..
