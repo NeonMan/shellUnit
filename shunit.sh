@@ -36,6 +36,9 @@ output_cmd () {
 # Env:
 #     SHU_SHELL
 test_file () {
+	#Export current file name
+	export SHU_TEST_FILE="$1"
+
 	OUT_CMD=`output_cmd`
 	pushd "$PWD" >/dev/null
 	cd `dirname "$1"`

@@ -18,7 +18,6 @@
 
 ! Begining of data
 \A=\# -- Framework setup begin --\n
-\A=SHU_TEST_FILE\="\$0"
 
 ! -- Initialize the preprocessor variables
 \A=@bind{shpp_line;1}
@@ -29,6 +28,7 @@
 
 ! -- Load the framework files
 \A=\n@read{@makepath{@var{shpp_shunit_path};assertions.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};array-asserts.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};basic-asserts.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};colors.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};file-asserts.sh;}}\n

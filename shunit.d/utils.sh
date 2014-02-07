@@ -1,3 +1,21 @@
+#Return array size
+#
+# Params:
+#     $1 <-- an Array
+# Echoes:
+#     The array size
+# Return:
+#     The array size
+shu_array_size () {
+	SHU_SIZE='0'
+	for SHU_E in $2
+	do
+		SHU_SIZE=`expr $SHU_SIZE + 1`
+	done
+	echo "$SHU_SIZE"
+	return "$SHU_SIZE"
+}
+
 #Normalize path, evaluating and removing the . and .. directories
 #
 # Params:
@@ -12,7 +30,7 @@ normalizePath () {
 #
 # Params: None
 shu_newtest () {
-	echo "SHU,TEST,$SHU_TEST_NAME"
+	echo "SHU,TEST,$SHU_TEST_FILE,$SHU_TEST_NAME"
 }
 
 #Return a file owner
