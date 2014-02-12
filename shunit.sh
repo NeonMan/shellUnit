@@ -23,6 +23,9 @@ output_cmd () {
 	elif [ $SHU_OUT_MODE = 'pretty' ]
 	then
 		echo "shunit-out-pretty"
+	elif [ $SHU_OUT_MODE = 'preprocess' ]
+	then
+		echo 'preprocess'
 	else
 		echo ""
 	fi
@@ -43,7 +46,10 @@ test_file () {
 	pushd "$PWD" >/dev/null
 	cd `dirname "$1"`
 	#if raw out, preprocess and pipe into the shell
-	if [ "$OUT_CMD" = '' ]
+	if [ "$OUT_CMD" = 'preprocess' ]
+	then
+		shpp "$1"
+	elif [ "$OUT_CMD" = '' ]
 	then
 		shpp "$1" | $SHU_SHELL
 	else
@@ -99,6 +105,9 @@ do
 	then
 		show_usage "$0"
 		exit
+	elif [ "$p" = "--pp" ]
+	then
+		SHU_OUT_MODE='preprocess'
 	else
 		SHU_TARGET="$p"
 	fi

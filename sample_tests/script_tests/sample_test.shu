@@ -19,6 +19,10 @@ testMultiplication () {
 	assertEquals "$SHU_RV" 40
 }
 
+testUsage () {
+	assertMatches "^Usage" `shu_usage`
+}
+
 testMain () {
 	assertMatches "^Usage" `shu_main`
 	assertMatches "^Usage" `shu_main asd 1 5`

@@ -19,7 +19,9 @@ usage () {
 #Main procedure
 if [ $# -ne 3 ]
 then
+#SHU{usage}
 	usage
+#SHU
 else
 	if [ $1 == 'sum' ]
 	then
