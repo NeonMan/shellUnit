@@ -104,14 +104,9 @@ shu_groupName () {
 # Params:
 #     $1 <-- a script path
 shu_loadTarget () {
-	#Encapsulate the whole script into the shu_main function
-	echo        'shu_main () {' > "$SHU_TMP_DIR/load_target.sh"
-	cat $1                      >> "$SHU_TMP_DIR/load_target.sh"
-	#Add a newline just in case the script does not end with one
-	echo        ''              >> "$SHU_TMP_DIR/load_target.sh"
-	echo        '}'             >> "$SHU_TMP_DIR/load_target.sh"
-	#Load into context
-	chmod +x "$SHU_TMP_DIR/load_target.sh"
-	. "$SHU_TMP_DIR/load_target.sh"
-	. "$1" >/dev/null 2>/dev/null
+	SHU_TEMP_TARGET=`mktemp --suffix="--shunit-target.sh"`
+	gema -f "/usr/share/shunit.d/targetpp.gma" "$1" > "$SHU_TEMP_TARGET"
+	chmod +x "$SHU_TEMP_TARGET"
+	. "$SHU_TEMP_TARGET"
+	rm "$SHU_TEMP_TARGET"
 }
