@@ -6,7 +6,31 @@
 # Params:
 #     $1 <-- exec name
 show_usage () {
-	echo "$1: [-raw] [SHU_SCRIPT|TEST_DIRECTORY]"
+	echo "$1: [-h] [-p] [-f FORMAT|--raw] [SHU_SCRIPT|TEST_DIRECTORY]"
+}
+
+#Show long shunit help
+#
+# Params:
+#     $1 <-- exec name
+show_help () {
+	echo "Usage:"
+	show_usage "$1"
+	echo "Execute shellUnit unit tests"
+	echo ""
+	echo "Mandatory arguments to long options are mandatory for short options too."
+	echo ""
+	echo "  -p, --preprocess  Output generated script to stdout, don't execute"
+	echo "  -w, --raw         Output results as CSV, don't format"
+	echo "  -f, --format=FMT  Use formateer FMT to process output"
+	echo ""
+	echo "Available formateers:"
+	echo "  pretty    Shows a colorized resume of the executed tests (default)"
+	echo "  xml       Outputs a XML document"
+	echo "  json      Outputs a JSON document"
+	echo "  raw       Equivalent to the --raw option"
+	echo ""
+	echo "Report bugs at: https://github.com/NeonMan/shellUnit/issues"
 }
 
 #Returns the command to pipe-into the script results
@@ -98,14 +122,14 @@ SHU_TARGET=''
 SHU_SHELL="/bin/bash"
 for p in $*
 do
-	if [ "$p" = "--raw" ]
+	if [  '(' "$p" = "--raw" ')' -o '(' "$p" = "-w" ')'  ]
 	then
 		SHU_OUT_MODE='raw'
 	elif [ '(' "$p" = "--help" ')' -o '(' "$p" = "-h" ')' ]
 	then
-		show_usage "$0"
+		show_help "$0"
 		exit
-	elif [ "$p" = "--pp" ]
+	elif [ '(' "$p" = "--preprocess" ')' -o '(' "$p" = "-p" ')' ]
 	then
 		SHU_OUT_MODE='preprocess'
 	else

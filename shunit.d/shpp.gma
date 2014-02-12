@@ -66,18 +66,6 @@ setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}
 ! teardown declaration
 teardown\ \(\)\ \{<teardown>\}=teardown \(\) \{$1\}@bind{shpp_teardown;teardown}
 
-! Load target file. this rule inserth the code:
-!if . "target.sh" >/dev/null 2>/dev/null
-!then
-!#       Do nothing
-!        echo "" >/dev/null
-!else
-!        echo "Failed to load target"
-!        exit -1
-!fi
-!
-! shu_loadTarget\ *\n=shu_main\ \(\)\ \{\n@read{$1}\n\}\nif . "$1" \>\/dev\/null 2\>\/dev\/null\;then echo "" \>\/dev\/null\;else echo "ERROR: Failed to load $1"\;exit -1\;fi\;\n
-
 ! ----------------------------------------------------------------------------
 !  <test> domain
 ! ----------------------------------------------------------------------------
