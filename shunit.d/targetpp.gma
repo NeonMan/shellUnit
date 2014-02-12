@@ -1,0 +1,25 @@
+! ----------------------------------------------------------------------------
+!  <targetpp.gma>:
+!      The target-script preprocesor.
+!      This program preprocess the target scripts, separating the main
+!    procedure of a shell script into a function. it also converts test
+!    blocks into functions
+! ----------------------------------------------------------------------------
+
+!Begin-end macros
+\A=\# -- mainpp begin --\n
+\A=shu_main \(\) \{\n
+\A=@bind{functions;}
+
+!bash-style functions
+function\ <A>\ \{*\}=@append{functions;$0\n}
+
+!csh-style functions
+<A>\ \(\)\ \{*\}=@append{functions;$0\n}
+
+!block-functions
+\#SHU\{<A>\}*\#SHU=$2@append{functions;shu_$1 \(\) \{\n$2\n\}}
+
+!end macro
+\Z=\}\n@var{functions}\n
+\Z=\# -- mainpp end --\n
