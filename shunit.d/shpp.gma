@@ -33,6 +33,7 @@
 \A=\n@read{@makepath{@var{shpp_shunit_path};file-asserts.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};filesystem-asserts.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};string-asserts.sh;}}\n
+\A=\n@read{@makepath{@var{shpp_shunit_path};process-asserts.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};utils.sh;}}\n
 
 ! -- Load framework setup files and execute initial config

@@ -1,4 +1,4 @@
 
-a_function () {
+aSample () {
   echo "SAMPLE"
 }

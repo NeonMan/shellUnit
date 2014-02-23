@@ -1,7 +1,7 @@
 #sample-02.shu
 shu_loadTarget ./target.sh
 
-testAFunction () {
-  OUTPUT=`a_function`
+testASample () {
+  OUTPUT=`aSample`
   assertEquals $OUTPUT "SAMPLE"
 }

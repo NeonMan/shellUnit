@@ -108,5 +108,5 @@ shu_loadTarget () {
 	gema -f "/usr/share/shunit.d/targetpp.gma" "$1" > "$SHU_TEMP_TARGET"
 	chmod +x "$SHU_TEMP_TARGET"
 	. "$SHU_TEMP_TARGET"
-	rm "$SHU_TEMP_TARGET"
+	#rm "$SHU_TEMP_TARGET"
 }

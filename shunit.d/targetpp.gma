@@ -8,14 +8,14 @@
 
 !Begin-end macros
 \A=\# -- mainpp begin --\n
-\A=shu_main \(\) \{\n
+\A=shu_main \(\) \{\nSHU_DUMMY=''\n\n
 \A=@bind{functions;}
 
 !bash-style functions
-function\ <A>\ \{*\}=@append{functions;$0\n}
+function\ <A>\ \{*\}=@append{functions;\nSHU_DUMMY=''\n$0\n}
 
 !csh-style functions
-<A>\ \(\)\ \{*\}=@append{functions;$0\n}
+<A>\ \(\)\ \{*\}=@append{functions;\nSHU_DUMMY=''\n$0\n}
 
 !block-functions
 \#SHU\{<A>\}*\#SHU=$2@append{functions;shu_$1 \(\) \{\n$2\n\}}

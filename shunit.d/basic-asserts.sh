@@ -1,4 +1,4 @@
-#Tests if the expression returns true
+#Tests if the expression returns true @deprecated
 #
 # Params:
 #    $1 <-- A '[[' expression string
@@ -9,6 +9,20 @@ assertTrue () {
 	else
 		fail "expression is false"
 	fi
+}
+
+#Always passes, used for custom asserts
+#
+# Params: None
+assertSuccess () {
+	pass
+}
+
+#Always fails, used for custom asserts
+#
+# Params: None
+assertFail () {
+	fail
 }
 
 #Tests if the expression returns false
