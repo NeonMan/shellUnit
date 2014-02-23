@@ -30,7 +30,7 @@ normalizePath () {
 #
 # Params: None
 shu_newtest () {
-	echo "SHU,TEST,$SHU_TEST_FILE,$SHU_TEST_NAME"
+	echo "SHU,TEST,$SHU_TEST_INIT_TIME,$SHU_TEST_FILE,$SHU_TEST_NAME"
 }
 
 #Return a file owner

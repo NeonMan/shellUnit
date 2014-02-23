@@ -21,6 +21,7 @@ pass () {
 	SHU_TEST_END_TIME=`date +"%s%3N"`
 	countAssert
 	echo "SHU,ASSERT,$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,$SHU_TEST_INIT_TIME,$SHU_TEST_END_TIME,OK,"
+	SHU_TEST_INIT_TIME="$SHU_TEST_END_TIME"
 }
 
 #Increment assert count AND error count while showing a message.
@@ -38,4 +39,5 @@ fail () {
 	countAssert
 	echo "SHU,ASSERT,$SHU_TEST_FILE,$SHU_TEST_NAME,$SHU_TEST_LINE,$SHU_TEST_INIT_TIME,$SHU_TEST_END_TIME,FAIL,$1"
 	SHU_FAILED_ASSERTS=`expr $SHU_FAILED_ASSERTS + 1`
+	SHU_TEST_INIT_TIME="$SHU_TEST_END_TIME"
 }
