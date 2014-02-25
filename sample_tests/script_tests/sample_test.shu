@@ -9,16 +9,19 @@ teardown () {
 }
 
 
+#GROUP{unit}
 testAddition () {
 	addition 1 2
 	assertEquals "$SHU_RV" 3
 }
 
+#GROUP{unit}
 testMultiplication () {
 	multiplication 5 8
 	assertEquals "$SHU_RV" 40
 }
 
+#GROUP{unit}
 testUsage () {
 	assertMatches "^Usage" `shu_usage`
 }
