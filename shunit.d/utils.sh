@@ -110,3 +110,16 @@ shu_loadTarget () {
 	. "$SHU_TEMP_TARGET"
 	#rm "$SHU_TEMP_TARGET"
 }
+
+# Repeat a command many times, using as parameters a ':' separated list.
+# For example, a three-element list with two-param elements would be:
+#     'ABC AAA:1234 QWERTY:2212 3333'
+#
+# Params:
+#    $1 <-- a function or command
+#    $2 <-- a list of parameters, each tuple is : separated
+shu_map () {
+	SHU_CMD_LIST=`echo "$2" | xargs -d: -L 1 echo "$1"`
+	eval "$SHU_CMD_LIST"
+}
+

@@ -23,6 +23,7 @@ testUsage () {
 	assertMatches "^Usage" `shu_usage`
 }
 
+#GROUP{main}
 testMain () {
 	assertMatches "^Usage" `shu_main`
 	assertMatches "^Usage" `shu_main asd 1 5`

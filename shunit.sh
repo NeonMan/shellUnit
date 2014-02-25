@@ -6,7 +6,7 @@
 # Params:
 #     $1 <-- exec name
 show_usage () {
-	echo "$1: [-h] [-p] [-f FORMAT|--raw] [SHU_SCRIPT|TEST_DIRECTORY]"
+	echo "$1: [-h] [-p] [-g] [-f FORMAT|--raw] <SHU_SCRIPT|TEST_DIRECTORY>"
 }
 
 #Show long shunit help
@@ -23,6 +23,7 @@ show_help () {
 	echo "  -p, --preprocess  Output generated script to stdout, don't execute"
 	echo "  -w, --raw         Output results as CSV, don't format"
 	echo "  -f, --format=FMT  Use formateer FMT to process output"
+	echo "  -g, --groups=GRP  Test the selected groups, sepparated by commas"
 	echo ""
 	echo "Available formateers:"
 	echo "  pretty    Shows a colorized resume of the executed tests (default)"
@@ -65,6 +66,7 @@ output_cmd () {
 test_file () {
 	#Export current file name
 	export SHU_TEST_FILE="$1"
+	export SHU_GROUPS="$SHU_GROUPS"
 
 	OUT_CMD=`output_cmd`
 	pushd "$PWD" >/dev/null
@@ -120,6 +122,7 @@ run_test () {
 SHU_OUT_MODE='pretty'
 SHU_TARGET=''
 SHU_SHELL="/bin/bash"
+SHU_GROUPS=''
 for p in $*
 do
 	if [  '(' "$p" = "--raw" ')' -o '(' "$p" = "-w" ')'  ]
@@ -132,6 +135,9 @@ do
 	elif [ '(' "$p" = "--preprocess" ')' -o '(' "$p" = "-p" ')' ]
 	then
 		SHU_OUT_MODE='preprocess'
+	elif [ '(' "$p" = "--groups=" ')' -o '(' "$p" = "-g" ')' ]
+	then
+		SHU_GROUPS=`echo "$p" | gema -p '\-\-groups\=*=$1' -p '\-g*=$1'`
 	else
 		SHU_TARGET="$p"
 	fi

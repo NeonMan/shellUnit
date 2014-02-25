@@ -44,7 +44,10 @@
 
 ! End of data
 !   Dispatch the tests here
-\Z=\n\#End of data\n@var{shpp_tests}\n
+\Z=\n@read{@makepath{@var{shpp_shunit_path};dispatcher.sh;}}\n
+\Z=shu_dispatcher "@var{shpp_tests}" "\$1"\n
+\Z=\n\#End of data\n
+!@var{shpp_tests}\n
 
 ! ----------------------------------------------------------------------------
 !  Generic rules, apply on top level domain
@@ -59,7 +62,10 @@
 !  * Set SHU_TEST_NAME at the begining
 !  * Set SHU_TEST_INIT_TIME at the begining
 !  * Set SHU_TEST_END_TIME at the end
-test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\nSHU_TEST_INIT_TIME=`date +"%s%3N"`\nshu_newtest\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\nSHU_TEST_END_TIME=`date +"%s%3N"`\n\}@append{shpp_tests;test$1\n}
+test<A>\ \(\)\ \{<test>\}=test$1\ \(\)\ \{\nSHU_TEST_NAME=$1\nSHU_TEST_INIT_TIME=`date +"%s%3N"`\nshu_newtest\n@var{shpp_setup}\n$2\n@var{shpp_teardown}\nSHU_TEST_END_TIME=`date +"%s%3N"`\n\}@append{shpp_tests;test$1 \#@var{shpp_group;}\n}@bind{shpp_group;}
+
+! Set the group name
+\#GROUP\{*\}=@bind{shpp_group;$1}
 
 ! setup declaration
 setup\ \(\)\ \{<setup>\}=setup \(\) \{$1\}@bind{shpp_setup;setup}
