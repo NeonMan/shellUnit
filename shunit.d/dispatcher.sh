@@ -9,8 +9,9 @@ shu_dispatcher () {
 	then
 		eval "$1"
 	else
-		echo "FIXME!"
-		echo "groups: $SHU_GROUPS"
-		echo "functions: $1"
+		#get the function groups
+		SHU_REGEXP=`echo "$SHU_GROUPS" | gema -p '\#*\n=$1' | sed 's/\,/\\\\|/'`
+		SHU_FILTERED=`echo "$1" | grep "\#.*$SHU_REGEXP$"`
+		eval "$SHU_FILTERED"
 	fi
 }

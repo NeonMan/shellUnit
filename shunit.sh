@@ -135,7 +135,7 @@ do
 	elif [ '(' "$p" = "--preprocess" ')' -o '(' "$p" = "-p" ')' ]
 	then
 		SHU_OUT_MODE='preprocess'
-	elif [ '(' "$p" = "--groups=" ')' -o '(' "$p" = "-g" ')' ]
+	elif [ '(' "`echo "$p" | awk '{print substr($0,0,10)}'`" = "--groups=" ')' -o '(' "`echo "$p" | awk '{print substr($0,0,3)}'`" = "-g" ')' ]
 	then
 		SHU_GROUPS=`echo "$p" | gema -p '\-\-groups\=*=$1' -p '\-g*=$1'`
 	else

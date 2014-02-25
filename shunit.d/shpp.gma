@@ -45,7 +45,7 @@
 ! End of data
 !   Dispatch the tests here
 \Z=\n@read{@makepath{@var{shpp_shunit_path};dispatcher.sh;}}\n
-\Z=shu_dispatcher "@var{shpp_tests}" "\$1"\n
+\Z=shu_dispatcher "@var{shpp_tests}"\n
 \Z=\n\#End of data\n
 !@var{shpp_tests}\n
 
