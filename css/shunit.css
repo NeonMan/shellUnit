@@ -2,15 +2,33 @@ td.doc {
     max-width: 450px;
     min-width: 450px;
     min-height: 5px;
-    padding: 10px 25px 1px 50px;
+    padding: 15px 25px 15px 35px;
     overflow-x: hidden;
     vertical-align: top;
     text-align: left;
+    font-family: Verdana, Geneva, sans-serif;
+}
+td.doc p {
+    text-align: justify;
 }
 td.code {
-    padding: 14px 15px 16px 25px;
+    padding: 15px 15px 15px 25px;
     width: 100%;
     vertical-align: top;
     border-left: 1px solid #e5e5ee;
-    background-color: #333333; color: #00FF00;
+    background-color: #222222; color: #FFFF66;
+    font-size: 90%;
+}
+#header, #footer {
+    padding: 40px;
+}
+#header {
+    border-bottom: 1px solid #e5e5ee;
+}
+#content {
+    margin: 0 5px;
+}
+#footer {
+    background-color: #000000;
+    border-top: 1px solid #e5e5ee;
 }
