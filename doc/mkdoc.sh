@@ -6,7 +6,6 @@ HEADER='<!DOCTYPE html>
 <meta charset="utf-8" />
 <title>shellUnit &mdash; Quickstart</title>
 <link rel="stylesheet" href="css/reset.css" />
-<link rel="stylesheet" href="css/text.css" />
 <link rel="stylesheet" href="css/shunit.css" />
 </head>
 <body>
