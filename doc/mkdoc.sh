@@ -20,9 +20,10 @@ HEADER='<!DOCTYPE html>
 	<p>
       shUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
     </p>
-  </div>'
+  </div>
+  <table cellspacin=0 cellpadding=0>'
 
-FOOTER='
+FOOTER='</table>
   <div id="footer" class="grid_24">
     <p>Footer</p>
   </div>
@@ -43,13 +44,17 @@ mkrow () {
   then
     COL1="$3"
   fi
-  echo '<div id="comment" class="grid_10">'
-  echo "$COL1"
-  echo '</div>'
-  echo '<div id="code" class="grid_14">'
-  echo "$COL2"
-  echo '</div>'
-  echo '<div class="clear"></div>'
+  echo '<tr>'
+    echo '<td class="doc">'
+      echo "$COL1"
+    echo '</td>'
+  echo '</tr>'
+
+  echo '<tr>'
+    echo '<td class="code">'
+      echo "$COL2"
+    echo '</td>'
+  echo '</tr>'
 }
 
 # Makes a row from a shell command
