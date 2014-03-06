@@ -7,26 +7,25 @@ HEADER='<!DOCTYPE html>
 <title>shellUnit &mdash; Quickstart</title>
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="css/text.css" />
-<link rel="stylesheet" href="css/960_24_col.css" />
-<!-- <link rel="stylesheet" href="css/demo.css" /> -->
 <link rel="stylesheet" href="css/shunit.css" />
 </head>
 <body>
-<div id="header" class="container_24">
-  <div class="grid_24">
-    <p>
+<div id="header">
+    <h1>
       shUnit.
-    </p>
+    </h1>
 	<p>
       shUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
     </p>
-  </div>
-  <table cellspacin=0 cellpadding=0>'
+</div>
+
+<div id="content">
+<table cellspacin=0 cellpadding=0>'
 
 FOOTER='</table>
-  <div id="footer" class="grid_24">
-    <p>Footer</p>
-  </div>
+</div>
+<div id="footer">
+  <p>Footer</p>
 </div>
 </body>'
 
