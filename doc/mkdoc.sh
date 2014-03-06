@@ -48,9 +48,6 @@ mkrow () {
     echo '<td class="doc">'
       echo "$COL1"
     echo '</td>'
-  echo '</tr>'
-
-  echo '<tr>'
     echo '<td class="code">'
       echo "$COL2"
     echo '</td>'
