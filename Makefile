@@ -1,4 +1,4 @@
-ccflags = -Wall -Werror
+ccflags = -std=c++11 -Wall -Werror
 
 #Make all targets EXCEPT pdf since pdflatex is freakin' huge
 simple: doc exec
@@ -14,34 +14,42 @@ install:
 	cp COPYING /usr/share/doc/shunit
 	cp -rf ./doc/* /usr/share/doc/shunit
 	cp Makefile /usr/share/doc/shunit
-	cp shunit.sh /usr/bin/
+	cp shu.sh /usr/bin/
 	cp shpp.sh /usr/bin/
-	ln -s ./shunit.sh /usr/bin/shunit
+	ln -s ./shu.sh /usr/bin/shu
 	ln -s ./shpp.sh /usr/bin/shpp
-	cp shunit-out-pretty /usr/bin
+	cp shellunit-out-pretty /usr/bin
+	cp shellunit-out-junit /usr/bin
+	cp shellunit.conf /etc/shellunit.conf
 
 remove:
 	-rm -rfv /usr/share/shunit.d
 	-rm -rfv /usr/share/doc/shunit
-	-rm /usr/bin/shunit
-	-rm /usr/bin/shunit.sh
+	-rm /usr/bin/shu
+	-rm /usr/bin/shu.sh
 	-rm /usr/bin/shpp
 	-rm /usr/bin/shpp.sh
-	-rm /usr/bin/shunit-out-pretty
+	-rm /usr/bin/shellunit-out-pretty
+	-rm /usr/bin/shellunit-out-junit
+	-rm /etc/shellunit.conf
+
 clean:
 	-rm ./doc/*.html
 	-rm ./doc/*.pdf
 	-rm ./doc/*.epub
 	-rm *.o
-	-rm shunit-out-pretty
-
+	-rm shellunit-out-pretty
+	-rm shellunit-out-junit
 #
 #Executables
 #
-exec: shunit-out-pretty
+exec: shellunit-out-pretty shellunit-out-junit
 
-shunit-out-pretty: shunit-out-pretty.cpp
-	c++  $(ccflags) -o $@ $^
+shellunit-out-junit: shellunit-out-junit.cpp
+	c++ $(ccflags) -o $@ $^
+
+shellunit-out-pretty: shellunit-out-pretty.cpp
+	c++ $(ccflags) -o $@ $^
 
 #
 #Documentation

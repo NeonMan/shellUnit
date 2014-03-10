@@ -11,10 +11,10 @@ HEADER='<!DOCTYPE html>
 <body>
 <div id="header">
     <h1>
-      shUnit.
+      shellUnit.
     </h1>
 	<p>
-      shUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
+      shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
     </p>
 </div>
 
@@ -76,16 +76,16 @@ mkdoc () {
   mkshrow "$CMD" "$TXT"
 
 
-  C1="To execute a test file we use the 'shunit' command. It needs at least one parameter, indicating either a test file:"
+  C1="To execute a test file we use the 'shu' command. It needs at least one parameter, indicating either a test file:"
   C2=""
   mkrow "$C1" "$C2"
-  C1="shunit sample-01.shu"
+  C1="shu sample-01.shu"
   mkshrow "$C1"
 
   C1="Or a directory containing various .shu files"
   C2=""
   mkrow "$C1" "$C2"
-  C1="shunit ./sample-dir/"
+  C1="shu ./sample-dir/"
   mkshrow "$C1"
 
   TXT="To provide a target we use the 'shu_loadTarget' function which as a parameter has the path to the shell script to be tested. At pressent, loading a target executes its 'main' procedure (all commands not in a function) so be careful with that."
@@ -96,34 +96,34 @@ mkdoc () {
   CMD="cat target.sh"
   mkshrow "$CMD" "$TXT"
 
-  TXT="The output of shunit ./sample-02/"
-  CMD="shunit sample-target.shu"
+  TXT="The output of shu ./sample-02/"
+  CMD="shu sample-target.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="The test asserts that 'a_function' will echo the string 'TEST'. shunit provides many assertions for different situations. here is a test using all the 'basic' asserts."
+  TXT="The test asserts that 'a_function' will echo the string 'TEST'. shellUnit provides many assertions for different situations. here is a test using all the 'basic' asserts."
   CMD="cat basic-asserts.shu"
   mkshrow "$CMD" "$TXT"
 
   TXT="The result of executing this test file is:"
-  CMD="shunit basic-asserts.shu"
+  CMD="shu basic-asserts.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="shunit works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable\$?. To access the return value, the SHU_RV variable is provided."
+  TXT="shellUnit works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable\$?. To access the return value, the SHU_RV variable is provided."
   CMD="cat sample-return.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by shunit, this way we can make self-contained tests if wanted."
-  CMD="shunit sample-return.shu"
+  TXT="Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by shellUnit, this way we can make self-contained tests if wanted."
+  CMD="shu sample-return.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="For testing the 'main' function, as if we called the script from the shell, shunit provided the 'shu_main' function, which will behave like the shell script."
+  TXT="For testing the 'main' function, as if we called the script from the shell, shellUnit provided the 'shu_main' function, which will behave like the shell script."
   CMD="cat test-main.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="shunit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shunit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format."
+  TXT="shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format."
   mkrow "$TXT" ""
 
-  CMD="shunit --raw basic-asserts.shu"
+  CMD="shu --raw basic-asserts.shu"
   TXT="An example of the raw output, using the basic asserts files:"
   mkrow "$TXT" ""
   mkshrow "$CMD"

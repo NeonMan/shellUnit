@@ -6,7 +6,7 @@
 # Params:
 #     $1 <-- exec name
 show_usage () {
-	echo "$1: [-h] [-p] [-g] [-f FORMAT|--raw] <SHU_SCRIPT|TEST_DIRECTORY>"
+	echo "$1: [-h] [-p] [-g] [-fFORMAT|--raw] <SHU_SCRIPT|TEST_DIRECTORY>"
 }
 
 #Show long shunit help
@@ -27,8 +27,7 @@ show_help () {
 	echo ""
 	echo "Available formateers:"
 	echo "  pretty    Shows a colorized resume of the executed tests (default)"
-	echo "  xml       Outputs a XML document"
-	echo "  json      Outputs a JSON document"
+	echo "  junit     Outputs a jUnit-like XML document"
 	echo "  raw       Equivalent to the --raw option"
 	echo ""
 	echo "Report bugs at: https://github.com/NeonMan/shellUnit/issues"
@@ -47,7 +46,10 @@ output_cmd () {
 		echo ""
 	elif [ $SHU_OUT_MODE = 'pretty' ]
 	then
-		echo "shunit-out-pretty"
+		echo "shellunit-out-pretty"
+	elif [ $SHU_OUT_MODE = 'junit' ]
+	then
+		echo "shellunit-out-junit"
 	elif [ $SHU_OUT_MODE = 'preprocess' ]
 	then
 		echo 'preprocess'
@@ -119,15 +121,36 @@ run_test () {
 }
 
 #Parse cli options
-SHU_OUT_MODE='pretty'
-SHU_TARGET=''
-SHU_SHELL="/bin/bash"
+
+#Default format
+SHU_OUT_MODE=`cat /etc/shellunit.conf | grep "^default_format:" | sed s/^default_format://`
+if [ "$SHU_OUT_MODE" = "" ]
+then
+	SHU_OUT_MODE='pretty'
+fi
+
+#Default target
+SHU_TARGET='./'
+
+#Set default shell
+SHU_SHELL=`cat /etc/shellunit.conf | grep "^default_shell:" | sed s/^default_shell://`
+if [ "$SHU_SHELL" = "" ]
+then
+	SHU_SHELL='/bin/bash'
+fi
+
+#Dafault groups
 SHU_GROUPS=''
+
 for p in $*
 do
 	if [  '(' "$p" = "--raw" ')' -o '(' "$p" = "-w" ')'  ]
 	then
 		SHU_OUT_MODE='raw'
+	elif [ '(' "`echo "$p" | awk '{print substr($0,0,10)}'`" = "--format=" ')' -o '(' "`echo "$p" | awk '{print substr($0,0,3)}'`" = "-f" ')' ]
+	then
+		SHU_OUT_MODE=`echo "$p" | gema -p '\-\-format\=*=$1' -p '\-f*=$1'`
+		echo "Mode: $SHU_OUT_MODE"
 	elif [ '(' "$p" = "--help" ')' -o '(' "$p" = "-h" ')' ]
 	then
 		show_help "$0"
