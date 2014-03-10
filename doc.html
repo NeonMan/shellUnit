@@ -9,10 +9,10 @@
 <body>
 <div id="header">
     <h1>
-      shUnit.
+      shellUnit.
     </h1>
 	<p>
-      shUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
+      shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
     </p>
 </div>
 
@@ -42,7 +42,7 @@ testSimpleTest () {
 </tr>
 <tr>
 <td class="doc">
-<p>To execute a test file we use the 'shunit' command. It needs at least one parameter, indicating either a test file:</p>
+<p>To execute a test file we use the 'shu' command. It needs at least one parameter, indicating either a test file:</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -50,7 +50,7 @@ testSimpleTest () {
 </tr>
 <tr>
 <td class="doc">
-<p>shunit sample-01.shu</p>
+<p>shu sample-01.shu</p>
 </td>
 <td class="code">
 <pre><code>TEST: SimpleTest
@@ -71,7 +71,7 @@ testSimpleTest () {
 </tr>
 <tr>
 <td class="doc">
-<p>shunit ./sample-dir/</p>
+<p>shu ./sample-dir/</p>
 </td>
 <td class="code">
 <pre><code>TEST: AnotherSimpleTest
@@ -115,20 +115,20 @@ aSample () {
 </tr>
 <tr>
 <td class="doc">
-<p>The output of shunit ./sample-02/</p>
+<p>The output of shu ./sample-02/</p>
 </td>
 <td class="code">
 <pre><code>TEST: ASample
- Assert @5 succeeded. (4ms)
+ Assert @5 succeeded. (3ms)
 -----------------------------------
- All test completed in 4ms
+ All test completed in 3ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>The test asserts that 'a_function' will echo the string 'TEST'. shunit provides many assertions for different situations. here is a test using all the 'basic' asserts.</p>
+<p>The test asserts that 'a_function' will echo the string 'TEST'. shellUnit provides many assertions for different situations. here is a test using all the 'basic' asserts.</p>
 </td>
 <td class="code">
 <pre><code>#basic-asserts.shu
@@ -136,11 +136,11 @@ aSample () {
 #This script will test the the basic asserts
 
 testTrue () {
-    assertTrue &quot;a = a&quot;
+    assertTrue &quot;[ a = a ]&quot;
 }
 
 testFalse () {
-    assertFalse &quot;a = b&quot;
+    assertFalse &quot;[ a = b ]&quot;
 }
 
 testEquals () {
@@ -194,46 +194,46 @@ testNotMatches () {
 </td>
 <td class="code">
 <pre><code>TEST: True
- Assert @5 succeeded. (5ms)
+ Assert @5 succeeded. (2ms)
 TEST: False
- Assert @9 failed. (5ms) Reason: expression is true
+ Assert @9 succeeded. (2ms)
 TEST: Equals
- Assert @13 succeeded. (3ms)
+ Assert @13 succeeded. (2ms)
  Assert @14 succeeded. (4ms)
- Assert @15 succeeded. (6ms)
+ Assert @15 succeeded. (5ms)
  Assert @16 succeeded. (4ms)
 TEST: NotEquals
  Assert @20 succeeded. (2ms)
- Assert @21 succeeded. (6ms)
- Assert @22 succeeded. (5ms)
- Assert @23 succeeded. (5ms)
+ Assert @21 succeeded. (5ms)
+ Assert @22 succeeded. (4ms)
+ Assert @23 succeeded. (3ms)
 TEST: GreaterThan
  Assert @27 succeeded. (3ms)
- Assert @28 succeeded. (5ms)
+ Assert @28 succeeded. (4ms)
 TEST: NotGreaterThan
- Assert @32 succeeded. (2ms)
- Assert @33 succeeded. (5ms)
- Assert @34 succeeded. (6ms)
+ Assert @32 succeeded. (1ms)
+ Assert @33 succeeded. (4ms)
+ Assert @34 succeeded. (5ms)
 TEST: LessThan
- Assert @38 succeeded. (3ms)
- Assert @39 succeeded. (4ms)
+ Assert @38 succeeded. (2ms)
+ Assert @39 succeeded. (5ms)
 TEST: NotLessThan
- Assert @43 succeeded. (3ms)
+ Assert @43 succeeded. (2ms)
  Assert @44 succeeded. (4ms)
- Assert @45 succeeded. (6ms)
+ Assert @45 succeeded. (5ms)
 TEST: Matches
- Assert @49 succeeded. (4ms)
+ Assert @49 succeeded. (2ms)
 TEST: NotMatches
- Assert @53 succeeded. (2ms)
+ Assert @53 succeeded. (3ms)
 -----------------------------------
- All test completed in 161ms
- 1 asserts failed.
+ All test completed in 128ms
+ All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>shunit works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable$?. To access the return value, the SHU_RV variable is provided.</p>
+<p>shellUnit works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable$?. To access the return value, the SHU_RV variable is provided.</p>
 </td>
 <td class="code">
 <pre><code>#return-sample.shu
@@ -253,21 +253,21 @@ testReturnValue () {
 </tr>
 <tr>
 <td class="doc">
-<p>Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by shunit, this way we can make self-contained tests if wanted.</p>
+<p>Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by shellUnit, this way we can make self-contained tests if wanted.</p>
 </td>
 <td class="code">
 <pre><code>TEST: ReturnValue
- Assert @9 succeeded. (5ms)
- Assert @11 failed. (8ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
+ Assert @9 succeeded. (3ms)
+ Assert @11 failed. (6ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
 -----------------------------------
- All test completed in 13ms
+ All test completed in 9ms
  1 asserts failed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>For testing the 'main' function, as if we called the script from the shell, shunit provided the 'shu_main' function, which will behave like the shell script.</p>
+<p>For testing the 'main' function, as if we called the script from the shell, shellUnit provided the 'shu_main' function, which will behave like the shell script.</p>
 </td>
 <td class="code">
 <pre><code>testMain () {
@@ -278,7 +278,7 @@ testReturnValue () {
 </tr>
 <tr>
 <td class="doc">
-<p>shunit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shunit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format.</p>
+<p>shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format.</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -294,41 +294,41 @@ testReturnValue () {
 </tr>
 <tr>
 <td class="doc">
-<p>shunit --raw basic-asserts.shu</p>
+<p>shu --raw basic-asserts.shu</p>
 </td>
 <td class="code">
-<pre><code>SHU,TEST,1394107356086,basic-asserts.shu,True
-SHU,ASSERT,basic-asserts.shu,True,5,1394107356086,1394107356091,OK,
-SHU,TEST,1394107356099,basic-asserts.shu,False
-SHU,ASSERT,basic-asserts.shu,False,9,1394107356099,1394107356104,FAIL,expression is true
-SHU,TEST,1394107356114,basic-asserts.shu,Equals
-SHU,ASSERT,basic-asserts.shu,Equals,13,1394107356114,1394107356116,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,14,1394107356116,1394107356123,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,15,1394107356123,1394107356127,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,16,1394107356127,1394107356132,OK,
-SHU,TEST,1394107356139,basic-asserts.shu,NotEquals
-SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394107356139,1394107356143,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394107356143,1394107356148,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394107356148,1394107356152,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394107356152,1394107356157,OK,
-SHU,TEST,1394107356165,basic-asserts.shu,GreaterThan
-SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394107356165,1394107356167,OK,
-SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394107356167,1394107356172,OK,
-SHU,TEST,1394107356180,basic-asserts.shu,NotGreaterThan
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394107356180,1394107356183,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394107356183,1394107356188,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394107356188,1394107356192,OK,
-SHU,TEST,1394107356199,basic-asserts.shu,LessThan
-SHU,ASSERT,basic-asserts.shu,LessThan,38,1394107356199,1394107356203,OK,
-SHU,ASSERT,basic-asserts.shu,LessThan,39,1394107356203,1394107356208,OK,
-SHU,TEST,1394107356215,basic-asserts.shu,NotLessThan
-SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394107356215,1394107356219,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394107356219,1394107356224,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394107356224,1394107356228,OK,
-SHU,TEST,1394107356236,basic-asserts.shu,Matches
-SHU,ASSERT,basic-asserts.shu,Matches,49,1394107356236,1394107356239,OK,
-SHU,TEST,1394107356246,basic-asserts.shu,NotMatches
-SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394107356246,1394107356248,OK,</code></pre>
+<pre><code>SHU,TEST,1394491730700,basic-asserts.shu,True
+SHU,ASSERT,basic-asserts.shu,True,5,1394491730700,1394491730703,OK,
+SHU,TEST,1394491730708,basic-asserts.shu,False
+SHU,ASSERT,basic-asserts.shu,False,9,1394491730708,1394491730710,OK,
+SHU,TEST,1394491730715,basic-asserts.shu,Equals
+SHU,ASSERT,basic-asserts.shu,Equals,13,1394491730715,1394491730717,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,14,1394491730717,1394491730721,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,15,1394491730721,1394491730725,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,16,1394491730725,1394491730728,OK,
+SHU,TEST,1394491730733,basic-asserts.shu,NotEquals
+SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394491730733,1394491730735,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394491730735,1394491730738,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394491730738,1394491730742,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394491730742,1394491730745,OK,
+SHU,TEST,1394491730751,basic-asserts.shu,GreaterThan
+SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394491730751,1394491730753,OK,
+SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394491730753,1394491730756,OK,
+SHU,TEST,1394491730761,basic-asserts.shu,NotGreaterThan
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394491730761,1394491730763,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394491730763,1394491730767,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394491730767,1394491730770,OK,
+SHU,TEST,1394491730776,basic-asserts.shu,LessThan
+SHU,ASSERT,basic-asserts.shu,LessThan,38,1394491730776,1394491730778,OK,
+SHU,ASSERT,basic-asserts.shu,LessThan,39,1394491730778,1394491730781,OK,
+SHU,TEST,1394491730786,basic-asserts.shu,NotLessThan
+SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394491730786,1394491730788,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394491730788,1394491730792,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394491730792,1394491730796,OK,
+SHU,TEST,1394491730800,basic-asserts.shu,Matches
+SHU,ASSERT,basic-asserts.shu,Matches,49,1394491730800,1394491730802,OK,
+SHU,TEST,1394491730807,basic-asserts.shu,NotMatches
+SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394491730807,1394491730811,OK,</code></pre>
 </td>
 </tr>
 <tr>
