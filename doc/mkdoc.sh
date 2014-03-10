@@ -11,7 +11,7 @@ HEADER='<!DOCTYPE html>
 <body>
 <div id="header">
     <h1>
-      shellUnit.
+      <img src="./img/shellUnit.png" alt="shellUnit">
     </h1>
 	<p>
       shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
