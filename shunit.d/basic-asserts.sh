@@ -1,13 +1,30 @@
-#Tests if the expression returns true @deprecated
+#Tests if the expression returns true
+#The return value of the expression must be nonzero for this assert to
+#succeed. Refer to the implementation below.
 #
 # Params:
-#    $1 <-- A '[[' expression string
+#    $1 <-- A expression.
 assertTrue () {
-	if [ `expr $1` != '0' ]
+	if eval "$1"
 	then
 		pass
 	else
-		fail "expression is false"
+		fail "expression '$1' is false"
+	fi
+}
+
+#Tests if the expression returns false
+#The return value of the expression must be zero for this assert to
+#succeed. Refer to the implementation below.
+#
+# Params:
+#    $1 <-- A expression.
+assertFalse () {
+	if eval "$1"
+	then
+		fail "expression '$1' is true"
+	else
+		pass
 	fi
 }
 
@@ -22,22 +39,8 @@ assertSuccess () {
 #
 # Params: None
 assertFail () {
-	fail
+	fail "assertFail called"
 }
-
-#Tests if the expression returns false
-#
-# Params:
-#    $1 <-- A '[[' expression string
-assertFalse () {
-        if [ `expr $1` = '0' ]
-        then
-                fail "expression is true"
-        else
-                pass
-        fi
-}
-
 
 #Tests if param 1 and 2 are equal (string)
 #

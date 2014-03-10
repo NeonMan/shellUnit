@@ -3,11 +3,11 @@
 #This script will test the the basic asserts
 
 testTrue () {
-	assertTrue "a = a"
+	assertTrue "[ a = a ]"
 }
 
 testFalse () {
-	assertFalse "a = b"
+	assertFalse "[ a = b ]"
 }
 
 testEquals () {
