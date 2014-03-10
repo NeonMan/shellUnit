@@ -9,7 +9,7 @@
 <body>
 <div id="header">
     <h1>
-      shellUnit.
+      <img src="./img/shellUnit.png" alt="shellUnit">
     </h1>
 	<p>
       shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.
@@ -119,9 +119,9 @@ aSample () {
 </td>
 <td class="code">
 <pre><code>TEST: ASample
- Assert @5 succeeded. (3ms)
+ Assert @5 succeeded. (4ms)
 -----------------------------------
- All test completed in 3ms
+ All test completed in 4ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
@@ -194,31 +194,31 @@ testNotMatches () {
 </td>
 <td class="code">
 <pre><code>TEST: True
- Assert @5 succeeded. (2ms)
+ Assert @5 succeeded. (3ms)
 TEST: False
- Assert @9 succeeded. (2ms)
+ Assert @9 succeeded. (4ms)
 TEST: Equals
  Assert @13 succeeded. (2ms)
- Assert @14 succeeded. (4ms)
+ Assert @14 succeeded. (5ms)
  Assert @15 succeeded. (5ms)
  Assert @16 succeeded. (4ms)
 TEST: NotEquals
  Assert @20 succeeded. (2ms)
- Assert @21 succeeded. (5ms)
- Assert @22 succeeded. (4ms)
- Assert @23 succeeded. (3ms)
+ Assert @21 succeeded. (6ms)
+ Assert @22 succeeded. (5ms)
+ Assert @23 succeeded. (4ms)
 TEST: GreaterThan
  Assert @27 succeeded. (3ms)
- Assert @28 succeeded. (4ms)
+ Assert @28 succeeded. (5ms)
 TEST: NotGreaterThan
- Assert @32 succeeded. (1ms)
- Assert @33 succeeded. (4ms)
+ Assert @32 succeeded. (3ms)
+ Assert @33 succeeded. (5ms)
  Assert @34 succeeded. (5ms)
 TEST: LessThan
  Assert @38 succeeded. (2ms)
  Assert @39 succeeded. (5ms)
 TEST: NotLessThan
- Assert @43 succeeded. (2ms)
+ Assert @43 succeeded. (4ms)
  Assert @44 succeeded. (4ms)
  Assert @45 succeeded. (5ms)
 TEST: Matches
@@ -226,7 +226,7 @@ TEST: Matches
 TEST: NotMatches
  Assert @53 succeeded. (3ms)
 -----------------------------------
- All test completed in 128ms
+ All test completed in 154ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
@@ -257,10 +257,10 @@ testReturnValue () {
 </td>
 <td class="code">
 <pre><code>TEST: ReturnValue
- Assert @9 succeeded. (3ms)
- Assert @11 failed. (6ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
+ Assert @9 succeeded. (6ms)
+ Assert @11 failed. (8ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
 -----------------------------------
- All test completed in 9ms
+ All test completed in 14ms
  1 asserts failed.
 -----------------------------------</code></pre>
 </td>
@@ -297,38 +297,38 @@ testReturnValue () {
 <p>shu --raw basic-asserts.shu</p>
 </td>
 <td class="code">
-<pre><code>SHU,TEST,1394491730700,basic-asserts.shu,True
-SHU,ASSERT,basic-asserts.shu,True,5,1394491730700,1394491730703,OK,
-SHU,TEST,1394491730708,basic-asserts.shu,False
-SHU,ASSERT,basic-asserts.shu,False,9,1394491730708,1394491730710,OK,
-SHU,TEST,1394491730715,basic-asserts.shu,Equals
-SHU,ASSERT,basic-asserts.shu,Equals,13,1394491730715,1394491730717,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,14,1394491730717,1394491730721,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,15,1394491730721,1394491730725,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,16,1394491730725,1394491730728,OK,
-SHU,TEST,1394491730733,basic-asserts.shu,NotEquals
-SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394491730733,1394491730735,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394491730735,1394491730738,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394491730738,1394491730742,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394491730742,1394491730745,OK,
-SHU,TEST,1394491730751,basic-asserts.shu,GreaterThan
-SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394491730751,1394491730753,OK,
-SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394491730753,1394491730756,OK,
-SHU,TEST,1394491730761,basic-asserts.shu,NotGreaterThan
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394491730761,1394491730763,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394491730763,1394491730767,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394491730767,1394491730770,OK,
-SHU,TEST,1394491730776,basic-asserts.shu,LessThan
-SHU,ASSERT,basic-asserts.shu,LessThan,38,1394491730776,1394491730778,OK,
-SHU,ASSERT,basic-asserts.shu,LessThan,39,1394491730778,1394491730781,OK,
-SHU,TEST,1394491730786,basic-asserts.shu,NotLessThan
-SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394491730786,1394491730788,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394491730788,1394491730792,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394491730792,1394491730796,OK,
-SHU,TEST,1394491730800,basic-asserts.shu,Matches
-SHU,ASSERT,basic-asserts.shu,Matches,49,1394491730800,1394491730802,OK,
-SHU,TEST,1394491730807,basic-asserts.shu,NotMatches
-SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394491730807,1394491730811,OK,</code></pre>
+<pre><code>SHU,TEST,1394494285449,basic-asserts.shu,True
+SHU,ASSERT,basic-asserts.shu,True,5,1394494285449,1394494285451,OK,
+SHU,TEST,1394494285458,basic-asserts.shu,False
+SHU,ASSERT,basic-asserts.shu,False,9,1394494285458,1394494285461,OK,
+SHU,TEST,1394494285469,basic-asserts.shu,Equals
+SHU,ASSERT,basic-asserts.shu,Equals,13,1394494285469,1394494285471,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,14,1394494285471,1394494285475,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,15,1394494285475,1394494285479,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,16,1394494285479,1394494285484,OK,
+SHU,TEST,1394494285490,basic-asserts.shu,NotEquals
+SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394494285490,1394494285492,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394494285492,1394494285497,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394494285497,1394494285500,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394494285500,1394494285505,OK,
+SHU,TEST,1394494285511,basic-asserts.shu,GreaterThan
+SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394494285511,1394494285514,OK,
+SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394494285514,1394494285518,OK,
+SHU,TEST,1394494285524,basic-asserts.shu,NotGreaterThan
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394494285524,1394494285526,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394494285526,1394494285530,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394494285530,1394494285535,OK,
+SHU,TEST,1394494285541,basic-asserts.shu,LessThan
+SHU,ASSERT,basic-asserts.shu,LessThan,38,1394494285541,1394494285543,OK,
+SHU,ASSERT,basic-asserts.shu,LessThan,39,1394494285543,1394494285547,OK,
+SHU,TEST,1394494285554,basic-asserts.shu,NotLessThan
+SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394494285554,1394494285556,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394494285556,1394494285559,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394494285559,1394494285563,OK,
+SHU,TEST,1394494285569,basic-asserts.shu,Matches
+SHU,ASSERT,basic-asserts.shu,Matches,49,1394494285569,1394494285571,OK,
+SHU,TEST,1394494285578,basic-asserts.shu,NotMatches
+SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394494285578,1394494285580,OK,</code></pre>
 </td>
 </tr>
 <tr>
