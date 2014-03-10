@@ -1,6 +1,6 @@
 /*
- * shunit-out-pretty.c
- *     Default output formatter for shunit. colorizes the output and shows some timing
+ * shellunit-out-pretty.c
+ *     Default output formatter for shellunit. colorizes the output and shows some timing
  */
 
 /*
