@@ -46,9 +46,9 @@ td.code {
     font-size: 2em;
     color: #7CC8E2;
 }
-#header li {
+#menu li {
     float: left;
-    padding: 10px;
+    padding: 10px 25px 10px 0px;
 }
 #footer {
     background-color: #000000;
