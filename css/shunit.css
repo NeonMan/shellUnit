@@ -7,7 +7,7 @@ a:link {
 } 
 a:visited {
     text-decoration:  none;
-    color:            #777;
+    color:            #7CC8E2;
 } 
 a:hover   {
     text-decoration:  underline;
@@ -45,6 +45,10 @@ td.code {
 #header h1 {
     font-size: 2em;
     color: #7CC8E2;
+}
+#header li {
+    float: left;
+    padding: 10px;
 }
 #footer {
     background-color: #000000;
