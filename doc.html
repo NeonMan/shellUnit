@@ -148,9 +148,9 @@ aSample () {
 </td>
 <td class="code">
 <pre><code>TEST: ASample
- Assert @5 succeeded. (5ms)
+ Assert @5 succeeded. (4ms)
 -----------------------------------
- All test completed in 5ms
+ All test completed in 4ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
@@ -227,35 +227,35 @@ testNotMatches () {
 TEST: False
  Assert @9 succeeded. (4ms)
 TEST: Equals
- Assert @13 succeeded. (4ms)
- Assert @14 succeeded. (7ms)
- Assert @15 succeeded. (6ms)
+ Assert @13 succeeded. (5ms)
+ Assert @14 succeeded. (9ms)
+ Assert @15 succeeded. (7ms)
  Assert @16 succeeded. (6ms)
 TEST: NotEquals
- Assert @20 succeeded. (3ms)
- Assert @21 succeeded. (7ms)
- Assert @22 succeeded. (6ms)
+ Assert @20 succeeded. (4ms)
+ Assert @21 succeeded. (9ms)
+ Assert @22 succeeded. (9ms)
  Assert @23 succeeded. (7ms)
 TEST: GreaterThan
- Assert @27 succeeded. (3ms)
- Assert @28 succeeded. (11ms)
+ Assert @27 succeeded. (4ms)
+ Assert @28 succeeded. (6ms)
 TEST: NotGreaterThan
- Assert @32 succeeded. (6ms)
- Assert @33 succeeded. (11ms)
- Assert @34 succeeded. (7ms)
+ Assert @32 succeeded. (3ms)
+ Assert @33 succeeded. (5ms)
+ Assert @34 succeeded. (6ms)
 TEST: LessThan
- Assert @38 succeeded. (4ms)
+ Assert @38 succeeded. (3ms)
  Assert @39 succeeded. (6ms)
 TEST: NotLessThan
- Assert @43 succeeded. (3ms)
+ Assert @43 succeeded. (2ms)
  Assert @44 succeeded. (5ms)
- Assert @45 succeeded. (6ms)
+ Assert @45 succeeded. (5ms)
 TEST: Matches
- Assert @49 succeeded. (4ms)
+ Assert @49 succeeded. (5ms)
 TEST: NotMatches
  Assert @53 succeeded. (3ms)
 -----------------------------------
- All test completed in 212ms
+ All test completed in 204ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
@@ -286,8 +286,8 @@ testReturnValue () {
 </td>
 <td class="code">
 <pre><code>TEST: ReturnValue
- Assert @9 succeeded. (6ms)
- Assert @11 failed. (9ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
+ Assert @9 succeeded. (7ms)
+ Assert @11 failed. (8ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
 -----------------------------------
  All test completed in 15ms
  1 asserts failed.
@@ -313,7 +313,15 @@ testReturnValue () {
 </tr>
 <tr>
 <td class="doc">
-<p>shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format.</p>
+<p>shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, all samples were using the default 'pretty' formatter.</p>
+</td>
+<td class="code">
+<pre><code></code></pre>
+</td>
+</tr>
+<tr>
+<td class="doc">
+<p>The 'raw' output formatter present the test result as CSV. Raw output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run.</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -332,38 +340,38 @@ testReturnValue () {
 <p>shu --raw basic-asserts.shu</p>
 </td>
 <td class="code">
-<pre><code>SHU,TEST,1394501884269,basic-asserts.shu,True
-SHU,ASSERT,basic-asserts.shu,True,5,1394501884269,1394501884272,OK,
-SHU,TEST,1394501884281,basic-asserts.shu,False
-SHU,ASSERT,basic-asserts.shu,False,9,1394501884281,1394501884284,OK,
-SHU,TEST,1394501884293,basic-asserts.shu,Equals
-SHU,ASSERT,basic-asserts.shu,Equals,13,1394501884293,1394501884296,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,14,1394501884296,1394501884302,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,15,1394501884302,1394501884311,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,16,1394501884311,1394501884319,OK,
-SHU,TEST,1394501884328,basic-asserts.shu,NotEquals
-SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394501884328,1394501884332,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394501884332,1394501884341,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394501884341,1394501884346,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394501884346,1394501884352,OK,
-SHU,TEST,1394501884360,basic-asserts.shu,GreaterThan
-SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394501884360,1394501884363,OK,
-SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394501884363,1394501884367,OK,
-SHU,TEST,1394501884379,basic-asserts.shu,NotGreaterThan
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394501884379,1394501884382,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394501884382,1394501884389,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394501884389,1394501884396,OK,
-SHU,TEST,1394501884404,basic-asserts.shu,LessThan
-SHU,ASSERT,basic-asserts.shu,LessThan,38,1394501884404,1394501884407,OK,
-SHU,ASSERT,basic-asserts.shu,LessThan,39,1394501884407,1394501884412,OK,
-SHU,TEST,1394501884421,basic-asserts.shu,NotLessThan
-SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394501884421,1394501884423,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394501884423,1394501884429,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394501884429,1394501884435,OK,
-SHU,TEST,1394501884444,basic-asserts.shu,Matches
-SHU,ASSERT,basic-asserts.shu,Matches,49,1394501884444,1394501884448,OK,
-SHU,TEST,1394501884456,basic-asserts.shu,NotMatches
-SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394501884456,1394501884459,OK,</code></pre>
+<pre><code>SHU,TEST,1394504712843,basic-asserts.shu,True
+SHU,ASSERT,basic-asserts.shu,True,5,1394504712843,1394504712846,OK,
+SHU,TEST,1394504712853,basic-asserts.shu,False
+SHU,ASSERT,basic-asserts.shu,False,9,1394504712853,1394504712858,OK,
+SHU,TEST,1394504712868,basic-asserts.shu,Equals
+SHU,ASSERT,basic-asserts.shu,Equals,13,1394504712868,1394504712871,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,14,1394504712871,1394504712877,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,15,1394504712877,1394504712882,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,16,1394504712882,1394504712893,OK,
+SHU,TEST,1394504712903,basic-asserts.shu,NotEquals
+SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394504712903,1394504712906,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394504712906,1394504712912,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394504712912,1394504712918,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394504712918,1394504712925,OK,
+SHU,TEST,1394504712934,basic-asserts.shu,GreaterThan
+SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394504712934,1394504712937,OK,
+SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394504712937,1394504712944,OK,
+SHU,TEST,1394504712954,basic-asserts.shu,NotGreaterThan
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394504712954,1394504712957,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394504712957,1394504712964,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394504712964,1394504712970,OK,
+SHU,TEST,1394504712982,basic-asserts.shu,LessThan
+SHU,ASSERT,basic-asserts.shu,LessThan,38,1394504712982,1394504712987,OK,
+SHU,ASSERT,basic-asserts.shu,LessThan,39,1394504712987,1394504712993,OK,
+SHU,TEST,1394504713006,basic-asserts.shu,NotLessThan
+SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394504713006,1394504713010,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394504713010,1394504713018,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394504713018,1394504713025,OK,
+SHU,TEST,1394504713035,basic-asserts.shu,Matches
+SHU,ASSERT,basic-asserts.shu,Matches,49,1394504713035,1394504713038,OK,
+SHU,TEST,1394504713049,basic-asserts.shu,NotMatches
+SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394504713049,1394504713053,OK,</code></pre>
 </td>
 </tr>
 <tr>
@@ -404,6 +412,18 @@ testTwo () {
 }</code></pre>
 </td>
 </tr>
+<tr id="Grouping_tests">
+  <th class="doc">
+    <!-- <a name="Grouping_tests"></a> -->Grouping tests
+  </th>
+  <td class="code"></td>
+</tr>
+<tr id="Parametrized_tests">
+  <th class="doc">
+    <!-- <a name="Parametrized_tests"></a> -->Parametrized tests
+  </th>
+  <td class="code"></td>
+</tr>
 </table>
 </div>
 <div id="footer">
@@ -422,6 +442,8 @@ testTwo () {
       <li><h3><a href="#Targetting_scripts">Targetting scripts</a></h3></li>
       <li><h3><a href="#Formatting_results">Formatting results</a></h3></li>
       <li><h3><a href="#Setup_and_Teardown">Setup and Teardown</a></h3></li>
+      <li><h3><a href="#Grouping_tests">Grouping tests</a></h3></li>
+      <li><h3><a href="#Parametrized_tests">Parametrized tests</a></h3></li>
 </ul>
 </div>
 </body></html>
