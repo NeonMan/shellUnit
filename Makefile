@@ -34,7 +34,6 @@ remove:
 	-rm /etc/shellunit.conf
 
 clean:
-	-rm ./doc/*.html
 	-rm ./doc/*.pdf
 	-rm ./doc/*.epub
 	-rm *.o
@@ -66,12 +65,9 @@ pdf: doc/readme.pdf
 doc/readme.pdf: doc/readme.mdn
 	pandoc -f markdown $^ -o $@
 
-html: doc/index.html doc/readme.html
+html: doc/readme.html
 
 doc/readme.html: doc/readme.mdn
-	markdown $^ > $@
-
-doc/index.html: doc/index.mdn
 	markdown $^ > $@
 
 quickstart:

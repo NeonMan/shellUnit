@@ -1,2 +1,2 @@
-doc/css/**
-shunit-out-pretty
+shellunit-out-junit
+shellunit-out-pretty
