@@ -13,23 +13,19 @@ HEADER='<!DOCTYPE html>
     <h1>
       <img src="./img/shellUnit.png" alt="shellUnit">
     </h1>
-    	<ul>
-		<li><a href="#introduction">Introduction</a></li>
-		<li><a href="#introduction">Sample 1</a></li>
-		<li><a href="#introduction">Sample 2</a></li>
-		<li><a href="#introduction">Sample 3</a></li>
-	</ul>
 </div>
 
 <div id="content">
-<table cellspacin=0 cellpadding=0>'
+<table>'
 
 FOOTER='</table>
 </div>
 <div id="footer">
   <p>Footer</p>
 </div>
-</body>'
+'
+
+LINK_LST=""
 
 #Make a documentation row, two 960gs columns.
 #
@@ -59,10 +55,12 @@ mkrow () {
 mkheader () {
   echo '<tr>'
   echo '  <td class="doc">'
-  echo "    <a name=`echo $1 | sed s/\ /_/`></a><h1>$1</h1>"
+  echo "    <a name=\"`echo $1 | tr ' ' '_'`\"></a><h2>$1</h2>"
   echo '  </td>'
   echo '  <td class="code"></td>'
   echo '</tr>'
+  LINK_LST="$LINK_LST
+      <li><h3><a href=\"#`echo $1 | tr ' ' '_'`\">$1</a></h3></li>"
 }
 
 # Makes a row from a shell command
@@ -162,7 +160,17 @@ mkdoc () {
 mainp () {
   echo "$HEADER"
   mkdoc
+
   echo "$FOOTER"
+
+
+  echo '<div id="menu">'
+  echo '<ul>'
+  echo "$LINK_LST"
+  echo "</ul>"
+  echo "</div>"
+
+  echo "</body></html>"
 }
 
 mainp
