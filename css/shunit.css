@@ -77,7 +77,12 @@ td.code {
 }
 #menu li {
     float: left;
+    padding: 0 20px 2px 0;
 }
+menu a:hover {
+    text-decoration:  none;
+    color:            #FFFFFF;
+} 
 #footer {
     background-color: #000000;
     border-top: 1px solid #e5e5ee;
