@@ -27,14 +27,25 @@ h3 {
     font-size: 0.9em;
     color: #7CC8E2;
 }
-td.doc {
+h2 {
+    font-size: 1.5em;
+    color: #7CC8E2;
+}
+td.doc, th.doc {
     max-width: 450px;
     min-width: 450px;
     min-height: 5px;
-    padding: 15px 25px 25px 40px;
     overflow-x: hidden;
     vertical-align: top;
     text-align: left;
+}
+td.doc {
+    padding: 10px 25px 10px 40px;
+}
+th.doc {
+    padding: 30px 25px 10px 40px;
+    font-size: 1.4em;
+    color: #7CC8E2;
 }
 td.doc p {
     text-align: justify;
