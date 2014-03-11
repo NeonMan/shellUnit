@@ -21,7 +21,10 @@ HEADER='<!DOCTYPE html>
 FOOTER='</table>
 </div>
 <div id="footer">
-  <p>Footer</p>
+  <p>
+   © 2014 shellUnit, see <a href="COPYING.txt">copying</a> for copyright information.
+  </p>
+  <a class="right" href="humans.txt" target="_blank"><img src="img/humanstxt-transparent-color.png" alt="humans.txt"></a>
 </div>
 '
 
@@ -171,6 +174,13 @@ mkdoc () {
   TXT="Test scripts may optionally have a 'setup' and 'teardown' function, which will be executed before and after every test respectively."
   CMD="cat sample-setup.shu"
   mkshrow "$CMD" "$TXT"
+
+  HE="Grouping tests"
+  mkheader "$HE"
+
+  HE="Parametrized tests"
+  mkheader "$HE"
+
 }
 
 mainp () {
