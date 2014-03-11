@@ -1,4 +1,4 @@
-ccflags = -std=c++11 -Wall -Werror
+cppflags = -std=c++11 -Wall -Werror
 
 #Make all targets EXCEPT pdf since pdflatex is freakin' huge
 simple: doc exec
@@ -46,10 +46,10 @@ clean:
 exec: shellunit-out-pretty shellunit-out-junit
 
 shellunit-out-junit: shellunit-out-junit.cpp
-	c++ $(ccflags) -o $@ $^
+	c++ $(cppflags) -o $@ $^
 
 shellunit-out-pretty: shellunit-out-pretty.cpp
-	c++ $(ccflags) -o $@ $^
+	c++ $(cppflags) -o $@ $^
 
 #
 #Documentation
