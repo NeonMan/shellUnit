@@ -59,6 +59,9 @@ td.code {
     color: #7CC8E2;
     font-size: 90%;
 }
+.right {
+    float: right;
+}
 #header {
     border-bottom: 1px solid #e5e5ee;
     padding: 50px 40px 10px
@@ -84,7 +87,9 @@ td.code {
     background-color: #000000;
     border-top: 1px solid #e5e5ee;
     color: #FFFFFF;
-    padding: 42px;
+    padding: 42px 1%;
+    width: 98%;
+    float: left;
 }
 #footer p {
     text-align: center;
