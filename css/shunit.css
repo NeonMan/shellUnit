@@ -79,7 +79,7 @@ td.code {
     float: left;
     padding: 0 20px 2px 0;
 }
-menu a:hover {
+#menu a:hover {
     text-decoration:  none;
     color:            #FFFFFF;
 } 
