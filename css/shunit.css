@@ -59,15 +59,24 @@ td.code {
     color: #7CC8E2;
     font-size: 90%;
 }
-#header, #footer {
+#header {
     padding: 40px;
 }
 #header {
     border-bottom: 1px solid #e5e5ee;
+    padding: 50px 40px 25px
+}
+#menu {
+    background-color: #000000;
+    border-bottom: 1px solid #e5e5ee;
+    float: left;
+    padding: 10px 1%;
+    position: fixed;
+    top: 0;
+    width: 98%;
 }
 #menu li {
     float: left;
-    padding: 10px 25px 10px 0px;
 }
 #footer {
     background-color: #000000;
