@@ -53,14 +53,16 @@ mkrow () {
 
 #$1 a header name
 mkheader () {
-  echo '<tr>'
-  echo '  <td class="doc">'
-  echo "    <a name=\"`echo $1 | tr ' ' '_'`\"></a><h2>$1</h2>"
-  echo '  </td>'
+
+  ID_NAME="`echo $1 | tr ' ' '_'`"
+  echo "<tr id=\"$ID_NAME\">"
+  echo '  <th class="doc">'
+  echo "    <!-- <a name=\"$ID_NAME\"></a> -->$1"
+  echo '  </th>'
   echo '  <td class="code"></td>'
   echo '</tr>'
   LINK_LST="$LINK_LST
-      <li><h3><a href=\"#`echo $1 | tr ' ' '_'`\">$1</a></h3></li>"
+      <li><h3><a href=\"#$ID_NAME\">$1</a></h3></li>"
 }
 
 # Makes a row from a shell command
@@ -96,6 +98,8 @@ mkdoc () {
   CMD="cat sample-01.shu"
   mkshrow "$CMD" "$TXT"
 
+  HE="Running shellUnit"
+  mkheader "$HE"
 
   C1="To execute a test file we use the 'shu' command. It needs at least one parameter, indicating either a test file:"
   C2=""
@@ -108,6 +112,9 @@ mkdoc () {
   mkrow "$C1" "$C2"
   C1="shu ./sample-dir/"
   mkshrow "$C1"
+
+  HE="Targetting scripts"
+  mkheader "$HE"
 
   TXT="To provide a target we use the 'shu_loadTarget' function which as a parameter has the path to the shell script to be tested. At pressent, loading a target executes its 'main' procedure (all commands not in a function) so be careful with that."
   CMD="cat sample-target.shu"
@@ -141,7 +148,13 @@ mkdoc () {
   CMD="cat test-main.shu"
   mkshrow "$CMD" "$TXT"
 
-  TXT="shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, the default ot 'pretty' formatter and 'raw' are available. The 'raw' output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run in CSV format."
+  HE="Formatting results"
+  mkheader "$HE"
+
+  TXT="shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, all samples were using the default 'pretty' formatter." 
+  mkrow "$TXT" ""
+
+  TXT="The 'raw' output formatter present the test result as CSV. Raw output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run."
   mkrow "$TXT" ""
 
   CMD="shu --raw basic-asserts.shu"
@@ -151,6 +164,9 @@ mkdoc () {
 
   TXT="The CSV format is not yet frozen so no information on what each column is will be provided until then."
   mkrow "$TXT" ""
+
+  HE="Setup and Teardown"
+  mkheader "$HE"
 
   TXT="Test scripts may optionally have a 'setup' and 'teardown' function, which will be executed before and after every test respectively."
   CMD="cat sample-setup.shu"
