@@ -15,6 +15,18 @@ a:hover   {
 body {
     font-family: Verdana, Geneva, sans-serif;
 }
+h1 {
+    font-size: 2em;
+    color: #7CC8E2;
+}
+h2 {
+    font-size: 1.5em;
+    color: #7CC8E2;
+}
+h3 {
+    font-size: 0.9em;
+    color: #7CC8E2;
+}
 td.doc {
     max-width: 450px;
     min-width: 450px;
@@ -41,10 +53,6 @@ td.code {
 }
 #header {
     border-bottom: 1px solid #e5e5ee;
-}
-#header h1 {
-    font-size: 2em;
-    color: #7CC8E2;
 }
 #menu li {
     float: left;
