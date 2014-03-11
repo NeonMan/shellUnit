@@ -60,9 +60,6 @@ td.code {
     font-size: 90%;
 }
 #header {
-    padding: 40px;
-}
-#header {
     border-bottom: 1px solid #e5e5ee;
     padding: 50px 40px 10px
 }
@@ -87,6 +84,7 @@ td.code {
     background-color: #000000;
     border-top: 1px solid #e5e5ee;
     color: #FFFFFF;
+    padding: 42px;
 }
 #footer p {
     text-align: center;
