@@ -1,0 +1,26 @@
+/* TEAM */
+	CSS and project lead: Eduardo Jose Alvarez Novoa
+	Twitter: @eanovoa
+	From: Vigo, Galicia, Spain
+	Works for: Agil-AZ S.L.
+
+	Client: Pepe Doval Gonzalez
+	Twitter: @pepellou
+	From: Santiago de Compostela, Galicia, Spain
+	Works for: Agil-AZ S.L.
+
+	Uvigo project manager: Miguel Reboiro Jato
+	Works for: Universidade de Vigo
+
+	Code monkey: Juan Luis Álvarez Martínez
+	Twitter: @combinesoldier
+	From: La Guardia, Galicia, Spain
+	Works for: Universidade de Vigo
+
+/* THANKS */
+	
+/* SITE */
+	Last update: 2014/03/11
+	Language: English
+	Doctype: HTML
+	IDE: nano
