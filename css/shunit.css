@@ -106,3 +106,7 @@ td.code {
     float: left;
     margin: 5px;
 }
+#footer a.link {
+      float: right;
+      margin-left: 20px;
+}
