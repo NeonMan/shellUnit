@@ -73,6 +73,10 @@ td.code {
 .right {
     float: right;
 }
+.fixed {
+      position: fixed;
+      bottom: 0;
+}
 #header {
     border-bottom: 1px solid #e5e5ee;
     padding: 50px 40px 10px
