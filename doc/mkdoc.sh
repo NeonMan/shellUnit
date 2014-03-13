@@ -3,6 +3,7 @@
 HEADER='<head>
 <meta charset="utf-8" />
 <title>shellUnit &mdash; Quickstart</title>
+<link rel="icon" href="img/favicon.ico" sizes="32x32" />
 <link rel="stylesheet" href="css/reset.css" />
 <link rel="stylesheet" href="css/shunit.css" />
 </head>
@@ -22,7 +23,10 @@ FOOTER='</table>
   <p>
    © 2014 shellUnit, see <a href="COPYING.txt">copying</a> for copyright information.
   </p>
-  <a class="right" href="humans.txt" target="_blank"><img src="img/humanstxt-transparent-color.png" alt="humans.txt"></a>
+  <a class="link" href="humans.txt" target="_blank"><img src="img/humanstxt-transparent-color.png" alt="humans.txt"></a>
+  <a class="link" href="https://github.com/NeonMan/shellUnit" target="_blank">
+  <input type="image" src="img/blacktocat.png" title="View shellUnit on GitHub">
+  </a>
 </div>
 '
 
