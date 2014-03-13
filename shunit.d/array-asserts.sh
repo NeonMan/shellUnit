@@ -12,7 +12,7 @@ assertArrayContains () {
 			return 0
 		fi
 	done
-	fail
+	fail "Array does not contain '$1'"
 }
 
 #Test if an array does not contain an item
@@ -25,7 +25,7 @@ assertArrayNotContains () {
 	do
 		if [ "$SHU_E" "=" "$1" ]
 		then
-			fail
+			fail "Array contains '$1'"
 			return 0
 		fi
 	done
@@ -42,7 +42,7 @@ assertArraySizeIs () {
 	then
 		pass
 	else
-		fail
+		fail "Array size is not '$1'"
 	fi
 }
 
@@ -54,7 +54,7 @@ assertArraySizeIs () {
 assertArraySizeIsNot () {
         if [ `shu_array_size "$2"` '=' '$1' ]
         then
-                fail
+                fail "Array size is '$1'"
         else
                 pass
         fi

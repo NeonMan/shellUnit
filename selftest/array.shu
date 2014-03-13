@@ -1,0 +1,27 @@
+setup () {
+	touch dummy.1
+	touch dummy.2
+	touch dummy.3
+}
+
+teardown () {
+	rm dummy.*
+}
+
+testArrayContains () {
+	assertArrayContains ".." "`ls -la`"
+	assertArrayContains "." "`ls -la`"
+}
+
+testArrayNotContains () {
+	assertArrayNotContains ".." "`ls`"
+	assertArrayNotContains "." "`ls`"
+}
+
+testArraySizeIs () {
+	assertArraySizeIs '3' "`ls dummy.*`"
+}
+
+testArraySizeIsNot () {
+	assertArraySizeIsNot '12345' "`ls dummy.*`"
+}

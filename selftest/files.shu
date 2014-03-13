@@ -1,0 +1,18 @@
+setup () {
+	touch empty.txt
+	echo "Hello world!" >hello.txt
+}
+
+teardown () {
+	rm empty.txt
+	rm hello.txt
+}
+
+testContains () {
+	assertContains 'hello.txt' 'Hello'
+}
+
+testNotContains () {
+	assertNotContains 'hello.txt' 'Mundo'
+	assertNotContains 'empty.txt' 'Mundo'
+}
