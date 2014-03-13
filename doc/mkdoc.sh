@@ -36,7 +36,12 @@ LINK_LST=""
 # Echoes:
 #     HTML code, with 960 div tags
 mkrow () {
-  COL1=`echo -e "$1" | txt2html --extract`
+  if [ "`echo $1 | grep '\#.*'`" = '' ]
+  then
+    COL1=`echo -e "$1" | txt2html --extract`
+  else
+    COL1="<p><span class=\"cmd\">$1</span></p>"
+  fi
   COL2=`echo -e "$2" | sed -r "s/\x1B\[([0-9]{1,3}((;[0-9]{1,3})*)?)?[m|K]//g" | awk '{print "    "$0}' | pandoc -f markdown -t html`
   if [ "$3" != "" ]
   then
@@ -44,7 +49,8 @@ mkrow () {
   fi
   echo '<tr>'
     echo '<td class="doc">'
-      echo "$COL1"
+      #awk '/[^(\$.*<)]/ { print $0 } /\$.*</ { print "<span class=\"cmd\">$0\/span><" }'
+      echo "$COL1" | sed s/shellUnit/'<strong>shellUnit<\/strong>'/
     echo '</td>'
     echo '<td class="code">'
       echo "$COL2"
@@ -73,7 +79,7 @@ mkshrow () {
     C2=`$1`
     if [ "$2" = "" ]
     then
-      mkrow "$C1" "$C2"
+      mkrow "# $C1" "$C2"
     else
       mkrow "$2" "$C2"
     fi
@@ -81,7 +87,7 @@ mkshrow () {
 
 mkdoc () {
 
-  HE="Introduction to shellUnit"
+  HE="Introduction"
   mkheader "$HE"
 
   C1="shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script."
@@ -92,14 +98,14 @@ mkdoc () {
   C2=""
   mkrow "$C1" "$C2"
 
-  HE="Sample test"
+  HE="Sample"
   mkheader "$HE"
 
   TXT="A test script is a plain shell script with a few characteristics. Test functions are declared csh-style and start with 'test', also, to be recogniced by automatic directory testing, its extension must be '.shu'"
   CMD="cat sample-01.shu"
   mkshrow "$CMD" "$TXT"
 
-  HE="Running shellUnit"
+  HE="Running"
   mkheader "$HE"
 
   C1="To execute a test file we use the 'shu' command. It needs at least one parameter, indicating either a test file:"
@@ -114,7 +120,7 @@ mkdoc () {
   C1="shu ./sample-dir/"
   mkshrow "$C1"
 
-  HE="Targetting scripts"
+  HE="Targetting"
   mkheader "$HE"
 
   TXT="To provide a target we use the 'shu_loadTarget' function which as a parameter has the path to the shell script to be tested. At pressent, loading a target executes its 'main' procedure (all commands not in a function) so be careful with that."
@@ -149,7 +155,7 @@ mkdoc () {
   CMD="cat test-main.shu"
   mkshrow "$CMD" "$TXT"
 
-  HE="Formatting results"
+  HE="Results"
   mkheader "$HE"
 
   TXT="shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, all samples were using the default 'pretty' formatter." 
@@ -166,17 +172,17 @@ mkdoc () {
   TXT="The CSV format is not yet frozen so no information on what each column is will be provided until then."
   mkrow "$TXT" ""
 
-  HE="Setup and Teardown"
+  HE="Setup/Teardown"
   mkheader "$HE"
 
   TXT="Test scripts may optionally have a 'setup' and 'teardown' function, which will be executed before and after every test respectively."
   CMD="cat sample-setup.shu"
   mkshrow "$CMD" "$TXT"
 
-  HE="Grouping tests"
+  HE="Groups"
   mkheader "$HE"
 
-  HE="Parametrized tests"
+  HE="Parametrizing"
   mkheader "$HE"
 
 }

@@ -16,15 +16,15 @@
 
 <div id="content">
 <table>
-<tr id="Introduction_to_shellUnit">
+<tr id="Introduction">
   <th class="doc">
-Introduction to shellUnit
+Introduction
   </th>
   <td class="code"></td>
 </tr>
 <tr>
 <td class="doc">
-<p>shellUnit is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.</p>
+<p><strong>shellUnit</strong> is a unit-test framework for bash-style and csh-style shells. It provides a way to separate the tests from the scripts, test functions main procedure and code blocks from a shell script.</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -38,9 +38,9 @@ Introduction to shellUnit
 <pre><code></code></pre>
 </td>
 </tr>
-<tr id="Sample_test">
+<tr id="Sample">
   <th class="doc">
-Sample test
+Sample
   </th>
   <td class="code"></td>
 </tr>
@@ -58,9 +58,9 @@ testSimpleTest () {
 }</code></pre>
 </td>
 </tr>
-<tr id="Running_shellUnit">
+<tr id="Running">
   <th class="doc">
-Running shellUnit
+Running
   </th>
   <td class="code"></td>
 </tr>
@@ -74,7 +74,7 @@ Running shellUnit
 </tr>
 <tr>
 <td class="doc">
-<p>shu sample-01.shu</p>
+<p><span class="cmd"># shu sample-01.shu</span></p>
 </td>
 <td class="code">
 <pre><code>TEST: SimpleTest
@@ -95,7 +95,7 @@ Running shellUnit
 </tr>
 <tr>
 <td class="doc">
-<p>shu ./sample-dir/</p>
+<p><span class="cmd"># shu ./sample-dir/</span></p>
 </td>
 <td class="code">
 <pre><code>TEST: AnotherSimpleTest
@@ -112,9 +112,9 @@ TEST: SimpleTest
 -----------------------------------</code></pre>
 </td>
 </tr>
-<tr id="Targetting_scripts">
+<tr id="Targetting">
   <th class="doc">
-Targetting scripts
+Targetting
   </th>
   <td class="code"></td>
 </tr>
@@ -149,16 +149,16 @@ aSample () {
 </td>
 <td class="code">
 <pre><code>TEST: ASample
- Assert @5 succeeded. (2ms)
+ Assert @5 succeeded. (4ms)
 -----------------------------------
- All test completed in 2ms
+ All test completed in 4ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>The test asserts that 'a_function' will echo the string 'TEST'. shellUnit provides many assertions for different situations. here is a test using all the 'basic' asserts.</p>
+<p>The test asserts that 'a_function' will echo the string 'TEST'. <strong>shellUnit</strong> provides many assertions for different situations. here is a test using all the 'basic' asserts.</p>
 </td>
 <td class="code">
 <pre><code>#basic-asserts.shu
@@ -224,46 +224,46 @@ testNotMatches () {
 </td>
 <td class="code">
 <pre><code>TEST: True
- Assert @5 succeeded. (3ms)
+ Assert @5 succeeded. (4ms)
 TEST: False
  Assert @9 succeeded. (2ms)
 TEST: Equals
- Assert @13 succeeded. (2ms)
+ Assert @13 succeeded. (3ms)
  Assert @14 succeeded. (4ms)
- Assert @15 succeeded. (5ms)
- Assert @16 succeeded. (4ms)
+ Assert @15 succeeded. (4ms)
+ Assert @16 succeeded. (5ms)
 TEST: NotEquals
  Assert @20 succeeded. (2ms)
- Assert @21 succeeded. (3ms)
+ Assert @21 succeeded. (4ms)
  Assert @22 succeeded. (5ms)
- Assert @23 succeeded. (3ms)
+ Assert @23 succeeded. (5ms)
 TEST: GreaterThan
- Assert @27 succeeded. (2ms)
+ Assert @27 succeeded. (4ms)
  Assert @28 succeeded. (4ms)
 TEST: NotGreaterThan
  Assert @32 succeeded. (2ms)
- Assert @33 succeeded. (5ms)
- Assert @34 succeeded. (3ms)
+ Assert @33 succeeded. (4ms)
+ Assert @34 succeeded. (5ms)
 TEST: LessThan
  Assert @38 succeeded. (2ms)
- Assert @39 succeeded. (3ms)
+ Assert @39 succeeded. (6ms)
 TEST: NotLessThan
- Assert @43 succeeded. (3ms)
- Assert @44 succeeded. (4ms)
- Assert @45 succeeded. (3ms)
+ Assert @43 succeeded. (2ms)
+ Assert @44 succeeded. (5ms)
+ Assert @45 succeeded. (4ms)
 TEST: Matches
  Assert @49 succeeded. (2ms)
 TEST: NotMatches
- Assert @53 succeeded. (2ms)
+ Assert @53 succeeded. (3ms)
 -----------------------------------
- All test completed in 123ms
+ All test completed in 141ms
  All assert(s) passed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>shellUnit works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable$?. To access the return value, the SHU_RV variable is provided.</p>
+<p><strong>shellUnit</strong> works as a preprocessor for test files. This means that to provide meaningful messages and dispatch tests it reads a test file and its targets and produces a single shell script which is executed. Because of that, some variables won't be accesible from a shell script, most notably the return-value variable$?. To access the return value, the SHU_RV variable is provided.</p>
 </td>
 <td class="code">
 <pre><code>#return-sample.shu
@@ -283,21 +283,21 @@ testReturnValue () {
 </tr>
 <tr>
 <td class="doc">
-<p>Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by shellUnit, this way we can make self-contained tests if wanted.</p>
+<p>Executing the test will yield the following output. Notice that an assert, wether failed or not, will print the line it is located preceded by an '@', and if failed, a reason why will be provided. Also, any function not starting with 'test' will be ignored by <strong>shellUnit</strong>, this way we can make self-contained tests if wanted.</p>
 </td>
 <td class="code">
 <pre><code>TEST: ReturnValue
- Assert @9 succeeded. (3ms)
+ Assert @9 succeeded. (4ms)
  Assert @11 failed. (6ms) Reason: expected &#39;203&#39; but found &#39;100&#39;
 -----------------------------------
- All test completed in 9ms
+ All test completed in 10ms
  1 asserts failed.
 -----------------------------------</code></pre>
 </td>
 </tr>
 <tr>
 <td class="doc">
-<p>For testing the 'main' function, as if we called the script from the shell, shellUnit provided the 'shu_main' function, which will behave like the shell script.</p>
+<p>For testing the 'main' function, as if we called the script from the shell, <strong>shellUnit</strong> provided the 'shu_main' function, which will behave like the shell script.</p>
 </td>
 <td class="code">
 <pre><code>testMain () {
@@ -306,15 +306,15 @@ testReturnValue () {
 }</code></pre>
 </td>
 </tr>
-<tr id="Formatting_results">
+<tr id="Results">
   <th class="doc">
-Formatting results
+Results
   </th>
   <td class="code"></td>
 </tr>
 <tr>
 <td class="doc">
-<p>shellUnit results can be formatted in different ways, the results shown so far being the default output formatter. So far, all samples were using the default 'pretty' formatter.</p>
+<p><strong>shellUnit</strong> results can be formatted in different ways, the results shown so far being the default output formatter. So far, all samples were using the default 'pretty' formatter.</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -322,7 +322,7 @@ Formatting results
 </tr>
 <tr>
 <td class="doc">
-<p>The 'raw' output formatter present the test result as CSV. Raw output can be activated by passing the --raw option to shellUnit. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run.</p>
+<p>The 'raw' output formatter present the test result as CSV. Raw output can be activated by passing the --raw option to <strong>shellUnit</strong>. This format is intended to be used by other programs as its input. It provides various information about the tests and asserts being run.</p>
 </td>
 <td class="code">
 <pre><code></code></pre>
@@ -338,41 +338,41 @@ Formatting results
 </tr>
 <tr>
 <td class="doc">
-<p>shu --raw basic-asserts.shu</p>
+<p><span class="cmd"># shu --raw basic-asserts.shu</span></p>
 </td>
 <td class="code">
-<pre><code>SHU,TEST,1394519880999,basic-asserts.shu,True
-SHU,ASSERT,basic-asserts.shu,True,5,1394519880999,1394519881001,OK,
-SHU,TEST,1394519881006,basic-asserts.shu,False
-SHU,ASSERT,basic-asserts.shu,False,9,1394519881006,1394519881008,OK,
-SHU,TEST,1394519881013,basic-asserts.shu,Equals
-SHU,ASSERT,basic-asserts.shu,Equals,13,1394519881013,1394519881015,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,14,1394519881015,1394519881018,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,15,1394519881018,1394519881021,OK,
-SHU,ASSERT,basic-asserts.shu,Equals,16,1394519881021,1394519881024,OK,
-SHU,TEST,1394519881029,basic-asserts.shu,NotEquals
-SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394519881029,1394519881032,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394519881032,1394519881035,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394519881035,1394519881038,OK,
-SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394519881038,1394519881041,OK,
-SHU,TEST,1394519881045,basic-asserts.shu,GreaterThan
-SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394519881045,1394519881047,OK,
-SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394519881047,1394519881051,OK,
-SHU,TEST,1394519881056,basic-asserts.shu,NotGreaterThan
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394519881056,1394519881057,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394519881057,1394519881060,OK,
-SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394519881060,1394519881063,OK,
-SHU,TEST,1394519881067,basic-asserts.shu,LessThan
-SHU,ASSERT,basic-asserts.shu,LessThan,38,1394519881067,1394519881069,OK,
-SHU,ASSERT,basic-asserts.shu,LessThan,39,1394519881069,1394519881072,OK,
-SHU,TEST,1394519881078,basic-asserts.shu,NotLessThan
-SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394519881078,1394519881079,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394519881079,1394519881083,OK,
-SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394519881083,1394519881086,OK,
-SHU,TEST,1394519881091,basic-asserts.shu,Matches
-SHU,ASSERT,basic-asserts.shu,Matches,49,1394519881091,1394519881092,OK,
-SHU,TEST,1394519881097,basic-asserts.shu,NotMatches
-SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394519881097,1394519881099,OK,</code></pre>
+<pre><code>SHU,TEST,1394708598747,basic-asserts.shu,True
+SHU,ASSERT,basic-asserts.shu,True,5,1394708598747,1394708598748,OK,
+SHU,TEST,1394708598754,basic-asserts.shu,False
+SHU,ASSERT,basic-asserts.shu,False,9,1394708598754,1394708598756,OK,
+SHU,TEST,1394708598762,basic-asserts.shu,Equals
+SHU,ASSERT,basic-asserts.shu,Equals,13,1394708598762,1394708598764,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,14,1394708598764,1394708598768,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,15,1394708598768,1394708598771,OK,
+SHU,ASSERT,basic-asserts.shu,Equals,16,1394708598771,1394708598776,OK,
+SHU,TEST,1394708598781,basic-asserts.shu,NotEquals
+SHU,ASSERT,basic-asserts.shu,NotEquals,20,1394708598781,1394708598783,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,21,1394708598783,1394708598787,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,22,1394708598787,1394708598790,OK,
+SHU,ASSERT,basic-asserts.shu,NotEquals,23,1394708598790,1394708598793,OK,
+SHU,TEST,1394708598799,basic-asserts.shu,GreaterThan
+SHU,ASSERT,basic-asserts.shu,GreaterThan,27,1394708598799,1394708598801,OK,
+SHU,ASSERT,basic-asserts.shu,GreaterThan,28,1394708598801,1394708598805,OK,
+SHU,TEST,1394708598811,basic-asserts.shu,NotGreaterThan
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,32,1394708598811,1394708598813,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,33,1394708598813,1394708598816,OK,
+SHU,ASSERT,basic-asserts.shu,NotGreaterThan,34,1394708598816,1394708598820,OK,
+SHU,TEST,1394708598826,basic-asserts.shu,LessThan
+SHU,ASSERT,basic-asserts.shu,LessThan,38,1394708598826,1394708598828,OK,
+SHU,ASSERT,basic-asserts.shu,LessThan,39,1394708598828,1394708598832,OK,
+SHU,TEST,1394708598839,basic-asserts.shu,NotLessThan
+SHU,ASSERT,basic-asserts.shu,NotLessThan,43,1394708598839,1394708598841,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,44,1394708598841,1394708598847,OK,
+SHU,ASSERT,basic-asserts.shu,NotLessThan,45,1394708598847,1394708598852,OK,
+SHU,TEST,1394708598859,basic-asserts.shu,Matches
+SHU,ASSERT,basic-asserts.shu,Matches,49,1394708598859,1394708598862,OK,
+SHU,TEST,1394708598869,basic-asserts.shu,NotMatches
+SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394708598869,1394708598873,OK,</code></pre>
 </td>
 </tr>
 <tr>
@@ -383,9 +383,9 @@ SHU,ASSERT,basic-asserts.shu,NotMatches,53,1394519881097,1394519881099,OK,</code
 <pre><code></code></pre>
 </td>
 </tr>
-<tr id="Setup_and_Teardown">
+<tr id="Setup/Teardown">
   <th class="doc">
-Setup and Teardown
+Setup/Teardown
   </th>
   <td class="code"></td>
 </tr>
@@ -413,15 +413,15 @@ testTwo () {
 }</code></pre>
 </td>
 </tr>
-<tr id="Grouping_tests">
+<tr id="Groups">
   <th class="doc">
-Grouping tests
+Groups
   </th>
   <td class="code"></td>
 </tr>
-<tr id="Parametrized_tests">
+<tr id="Parametrizing">
   <th class="doc">
-Parametrized tests
+Parametrizing
   </th>
   <td class="code"></td>
 </tr>
@@ -437,14 +437,14 @@ Parametrized tests
 <div id="menu">
 <ul>
 
-      <li><h3><a href="#Introduction_to_shellUnit">Introduction to shellUnit</a></h3></li>
-      <li><h3><a href="#Sample_test">Sample test</a></h3></li>
-      <li><h3><a href="#Running_shellUnit">Running shellUnit</a></h3></li>
-      <li><h3><a href="#Targetting_scripts">Targetting scripts</a></h3></li>
-      <li><h3><a href="#Formatting_results">Formatting results</a></h3></li>
-      <li><h3><a href="#Setup_and_Teardown">Setup and Teardown</a></h3></li>
-      <li><h3><a href="#Grouping_tests">Grouping tests</a></h3></li>
-      <li><h3><a href="#Parametrized_tests">Parametrized tests</a></h3></li>
+      <li><h3><a href="#Introduction">Introduction</a></h3></li>
+      <li><h3><a href="#Sample">Sample</a></h3></li>
+      <li><h3><a href="#Running">Running</a></h3></li>
+      <li><h3><a href="#Targetting">Targetting</a></h3></li>
+      <li><h3><a href="#Results">Results</a></h3></li>
+      <li><h3><a href="#Setup/Teardown">Setup/Teardown</a></h3></li>
+      <li><h3><a href="#Groups">Groups</a></h3></li>
+      <li><h3><a href="#Parametrizing">Parametrizing</a></h3></li>
 </ul>
 </div>
 </body></html>
