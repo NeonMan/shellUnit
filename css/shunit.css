@@ -7,8 +7,9 @@
       background-size: 100%;
       margin: 30px auto 10px;
 }
-
-
+.text-center {
+      text-align: center;
+}
 a {
     font-weight:      bold;   
 }
