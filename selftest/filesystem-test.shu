@@ -1,0 +1,37 @@
+setup () {
+	mkfifo a_fifo
+	touch  a_file
+	ln -s a_file a_link
+	ln a_file a_hardlink
+	chmod 777 a_file
+}
+
+teardown () {
+	rm a_file
+	rm a_fifo
+	rm a_link
+	rm a_hardlink
+}
+
+testIsSomething () {
+	ME=`whoami`
+	assertIsFile a_file
+	assertIsNotFile a_fifo
+	assertIsDir .
+	assertIsNotDir a_file
+	assertIsNotDir a_fifo
+	assertExists a_file
+	assertNotExists a_nothing
+	assertIsLink a_link
+	assertIsNotLink a_file
+	assertSameInode a_file a_hardlink
+	assertNotSameInode a_file a_fifo
+	assertOwnerIs a_file $ME
+	assertOwnerIsNot a_file "NOT$ME"
+	assertGroupIs a_file $ME
+	assertGroupIsNot a_file "NOT$ME"
+	assertPermissionsAre a_file 777
+	assertPermissionsAre a_file -rwxrwxrwx
+	assertPermissionsAreNot a_file 666
+	assertPermissionsAreNot a_file drwxrwxrwx
+}
