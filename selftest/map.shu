@@ -1,0 +1,3 @@
+testMappedFunction () {
+	shu_map assertEquals 'a a:b b:c c'
+}
