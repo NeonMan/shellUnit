@@ -1,0 +1,9 @@
+testProc () {
+	sleep 5 &
+	SLEEP_PID=$!
+	assertPidRunning $SLEEP_PID
+	assertCommandRunning "sleep 5"
+	sleep 6
+	assertPidNotRunning $SLEEP_PID
+	assertCommandNotRunning "sleep 5"
+}

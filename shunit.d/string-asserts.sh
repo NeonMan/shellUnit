@@ -4,7 +4,8 @@
 #    $1 <-- A regular expression
 #    $2 <-- A string
 assertMatches () {
-        if [[ "$2" =~ $1 ]]
+	SHU_TMP=`echo "$2" | grep "$1"`
+        if [[ "$SHU_TMP" != "" ]]
         then
                 pass
         else
@@ -18,7 +19,8 @@ assertMatches () {
 #    $1 <-- A string
 #    $2 <-- A regular expression
 assertNotMatches () {
-        if [[ "$2" =~ $1 ]]
+	SHU_TMP=`echo "$2" | grep "$1"`
+        if [[ "$SHU_TMP" != "" ]]
         then
                 fail "expected '$2' to NOT match regular expression '$1'"
         else
@@ -151,34 +153,6 @@ assertStringNotStartsWith () {
 	if [[ "$1" == "$2"* ]]
 	then
 		fail "'$1' starts with '$2'"
-	else
-		pass
-	fi
-}
-
-#Test is a strings ends with another
-#
-# Params:
-#     $1 <-- String
-#     $2 <-- Expected suffix
-assertStringStartsWith () {
-	if [[ "$1" == *"$2" ]]
-	then
-		pass
-	else
-		fail "'$1' does not end with '$2'"
-	fi
-}
-
-#Test is a strings does not start with another
-#
-# Params:
-#     $1 <-- String
-#     $2 <-- Expected suffix
-assertStringNotStartsWith () {
-	if [[ "$1" == *"$2" ]]
-	then
-		fail "'$1' ends with '$2'"
 	else
 		pass
 	fi

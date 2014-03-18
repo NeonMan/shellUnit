@@ -23,7 +23,7 @@ assertArrayContains () {
 assertArrayNotContains () {
 	for SHU_E in $2
 	do
-		if [ "$SHU_E" "=" "$1" ]
+		if [ "$SHU_E" '=' "$1" ]
 		then
 			fail "Array contains '$1'"
 			return 0
@@ -38,7 +38,13 @@ assertArrayNotContains () {
 #     $1 <-- expectedSize
 #     $2 <-- anArray
 assertArraySizeIs () {
-	if [ `shu_array_size "$2"` '=' '$1' ]
+	SHU_COUNT=0
+	for SHU_E in $2
+	do
+		SHU_COUNT=`expr $SHU_COUNT + 1`
+	done
+
+	if [ $SHU_COUNT -eq "$1" ]
 	then
 		pass
 	else
@@ -52,7 +58,13 @@ assertArraySizeIs () {
 #     $1 <-- unexpectedSize
 #     $2 <-- anArray
 assertArraySizeIsNot () {
-        if [ `shu_array_size "$2"` '=' '$1' ]
+	SHU_COUNT=0
+	for SHU_E in $2
+	do
+		SHU_COUNT=`expr $SHU_COUNT + 1`
+	done
+
+        if [ $SHU_COUNT -eq "$1" ]
         then
                 fail "Array size is '$1'"
         else

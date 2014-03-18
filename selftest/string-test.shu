@@ -1,0 +1,42 @@
+testMatches () {
+	assertMatches '^ASD$' "ASD"
+	assertMatches "1234" "asdfasdfasdf1234asdasd"
+	assertMatches 'A$' "aaaaasaA"
+}
+
+testNotMatches () {
+	assertNotMatches '^ASD$' "AFD"
+	assertNotMatches "1234" "asdfasdfasdf134asdasd"
+	assertNotMatches 'B$' "aaaaasaA"
+}
+
+testStringContains () {
+	assertStringContains "1234567890" "45"
+}
+
+testStringNotContains () {
+	assertStringNotContains "123456789" "0"
+}
+
+testEqualsIgnoreCase () {
+	assertEqualsIgnoreCase "AaAaAa" "AAAAAA"
+	assertEqualsIgnoreCase "AaAaAa" "aaaaaa"
+	assertEqualsIgnoreCase "AaAaAa" "AaAaAa"
+}
+
+testEqualsNotIgnoreCase () {
+	assertNotEqualsIgnoreCase "AaAbAa" "AAAAAA"
+	assertNotEqualsIgnoreCase "AaAbAa" "aaaaaa"
+	assertNotEqualsIgnoreCase "AaAbAa" "AaAaAa"
+}
+
+testIgnoreWhitespace () {
+	assertEqualsIgnoringWhitespace "a b c" "abc"
+	assertNotEqualsIgnoringWhitespace "a c b" "nba"
+	assertNotEqualsIgnoringWhitespace "a c b" "a b   c"
+}
+
+testStringStartsWith () {
+	assertStringStartsWith "ASDFG" "AS"
+	assertStringNotStartsWith "ASDF" "GH"
+}
