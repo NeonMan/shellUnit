@@ -26,6 +26,7 @@ a:hover   {
 }
 body {
     font-family: Verdana, Geneva, sans-serif;
+    min-height: 600px;
 }
 h1 {
     font-size: 1.8em;
