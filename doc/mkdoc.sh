@@ -9,11 +9,11 @@ HEADER='<head>
 </head>
 <body>
 <div id="header">
-    <h1>
-      <img src="./img/shellUnit.png" alt="shellUnit">
-    </h1>
-</div>
-
+  <h1>
+    <a class="link" href="http://neonman.github.io/shellUnit/">
+      <img src="img/shellUnit.png" alt="shellUnit">
+    </a>
+  </h1></div>
 <div id="content">
 <table>'
 
@@ -25,7 +25,7 @@ FOOTER='</table>
   </p>
   <a class="link" href="humans.txt" target="_blank"><img src="img/humanstxt-transparent-color.png" alt="humans.txt"></a>
   <a class="link" href="https://github.com/NeonMan/shellUnit" target="_blank">
-  <input type="image" src="img/blacktocat.png" title="View shellUnit on GitHub">
+  <img src="img/blacktocat.png" alt="View shellUnit on GitHub">
   </a>
 </div>
 '

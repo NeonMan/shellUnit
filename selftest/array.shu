@@ -9,8 +9,8 @@ teardown () {
 }
 
 testArrayContains () {
-	assertArrayContains ".." "`ls -la`"
-	assertArrayContains "." "`ls -la`"
+	assertArrayContains ".." "`ls -a`"
+	assertArrayContains "." "`ls -a`"
 }
 
 testArrayNotContains () {

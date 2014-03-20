@@ -26,6 +26,9 @@
 \A=@bind{shpp_tests;}
 \A=@bind{shpp_shunit_path;/usr/share/shunit.d/}
 
+! -- Set in-framework variables
+\A=\nSHU_PATH=\"@var{shpp_shunit_path}\"\n
+
 ! -- Load the framework files
 \A=\n@read{@makepath{@var{shpp_shunit_path};assertions.sh;}}\n
 \A=\n@read{@makepath{@var{shpp_shunit_path};array-asserts.sh;}}\n
