@@ -81,6 +81,10 @@ td.code {
     border-bottom: 1px solid #e5e5ee;
     padding: 50px 40px 10px
 }
+#description {
+      margin: 0 auto;
+      width: 50%;
+}
 #menu {
     background-color: #000000;
     border-bottom: 1px solid #e5e5ee;
