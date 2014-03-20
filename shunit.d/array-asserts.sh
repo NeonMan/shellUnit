@@ -4,7 +4,7 @@
 #     $1 <-- expectedItem
 #     $2 <-- anArray
 assertArrayContains () {
-	for SHU_E in $2
+	for SHU_E in "$2"
 	do
 		if [ "$SHU_E" "=" "$1" ]
 		then
@@ -21,7 +21,7 @@ assertArrayContains () {
 #     $1 <-- unexpectedItem
 #     $2 <-- anArray
 assertArrayNotContains () {
-	for SHU_E in $2
+	for SHU_E in "$2"
 	do
 		if [ "$SHU_E" '=' "$1" ]
 		then
@@ -39,7 +39,7 @@ assertArrayNotContains () {
 #     $2 <-- anArray
 assertArraySizeIs () {
 	SHU_COUNT=0
-	for SHU_E in $2
+	for SHU_E in "$2"
 	do
 		SHU_COUNT=`expr $SHU_COUNT + 1`
 	done
@@ -59,7 +59,7 @@ assertArraySizeIs () {
 #     $2 <-- anArray
 assertArraySizeIsNot () {
 	SHU_COUNT=0
-	for SHU_E in $2
+	for SHU_E in "$2"
 	do
 		SHU_COUNT=`expr $SHU_COUNT + 1`
 	done

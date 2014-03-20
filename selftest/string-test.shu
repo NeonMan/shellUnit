@@ -19,15 +19,15 @@ testStringNotContains () {
 }
 
 testEqualsIgnoreCase () {
-	assertEqualsIgnoreCase "AaAaAa" "AAAAAA"
-	assertEqualsIgnoreCase "AaAaAa" "aaaaaa"
-	assertEqualsIgnoreCase "AaAaAa" "AaAaAa"
+	assertEqualsIgnoringCase "AaAaAa" "AAAAAA"
+	assertEqualsIgnoringCase "AaAaAa" "aaaaaa"
+	assertEqualsIgnoringCase "AaAaAa" "AaAaAa"
 }
 
 testEqualsNotIgnoreCase () {
-	assertNotEqualsIgnoreCase "AaAbAa" "AAAAAA"
-	assertNotEqualsIgnoreCase "AaAbAa" "aaaaaa"
-	assertNotEqualsIgnoreCase "AaAbAa" "AaAaAa"
+	assertNotEqualsIgnoringCase "AaAbAa" "AAAAAA"
+	assertNotEqualsIgnoringCase "AaAbAa" "aaaaaa"
+	assertNotEqualsIgnoringCase "AaAbAa" "AaAaAa"
 }
 
 testIgnoreWhitespace () {

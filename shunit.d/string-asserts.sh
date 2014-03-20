@@ -34,7 +34,7 @@ assertNotMatches () {
 #     $1 <-- A string
 #     $2 <-- A substring
 assertStringContains () {
-	if [[ "$1" == *"$2"* ]]
+	if [[ "$1" == *$2* ]]
 	then
 		pass
 	else
@@ -48,7 +48,7 @@ assertStringContains () {
 #     $1 <-- A string
 #     $2 <-- A substring
 assertStringNotContains () {
-	if [[ "$1" == *"$2"* ]]
+	if [[ "$1" == *$2* ]]
 	then
 		fail "'$1' contais '$2'"
 	else
@@ -136,7 +136,7 @@ assertNotEqualsIgnoringWhitespace () {
 #     $1 <-- String
 #     $2 <-- Expected prefix
 assertStringStartsWith () {
-	if [[ "$1" == "$2"* ]]
+	if [[ "$1" == $2* ]]
 	then
 		pass
 	else
@@ -150,7 +150,7 @@ assertStringStartsWith () {
 #     $1 <-- String
 #     $2 <-- Expected prefix
 assertStringNotStartsWith () {
-	if [[ "$1" == "$2"* ]]
+	if [[ "$1" == $2* ]]
 	then
 		fail "'$1' starts with '$2'"
 	else
