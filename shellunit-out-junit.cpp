@@ -32,6 +32,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <map>
 #include <list>
 #include <string>
+#include <vector>
+#include <sstream>
 
 /*
 
@@ -64,6 +66,22 @@ namespace shellUnit {
 
   public:
     test(){}
+    test(string cname, string tname, string err){
+      className = cname;
+      testName = tname;
+      errorMessage = err;
+      failed = true;
+    }
+    test(string cname, string tname){
+      className = cname;
+      testName = tname;
+      errorMessage = "";
+      failed = false;
+    }
+    bool   failed;
+    string className;
+    string testName;
+    string errorMessage;
   };
 
   /**
@@ -90,6 +108,16 @@ namespace shellUnit {
     void addTest(test t){
       tests.push_back(t);
     }
+    ///Add a sucessful test
+    void addSuccess(string className, string assertName){
+      test t(className, assertName);
+      tests.push_back(t);
+    }
+    ///Add a failing test
+    void addFail(string className, string assertName, string reason){
+      test t (className, assertName, reason);
+      tests.push_back(t);
+    }
     ///Return all tests
     list<test>& getTests(){
       return tests;
@@ -101,20 +129,9 @@ namespace shellUnit {
    *
    */
   void dump_xml(testSuite ts){
-    //Get testSuite info
-    string test_name = "";
-    double total_time = 0.0;
-    int    error_count = 0, skip_count = 0, test_count = 0, fail_count = 0;
-
     //Write XML header
     cout<< "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"<<endl;
-    cout<< "<testsuite failures=\""<<fail_count
-        << "\" time=\""<<total_time
-        << "\" errors=\""<<error_count
-        << "\" skipped=\""<<skip_count
-        << "\" tests=\""<<test_count
-        << "\" name=\""<<test_name
-        << "\">"<<endl;
+    cout<< "<testsuite>"<<endl;
 
     //Dump all properties
     cout<< "  <properties>"<<endl;
@@ -127,28 +144,75 @@ namespace shellUnit {
 
     //Dump all tests
     for(test t : ts.getTests()){
-
+      cout<<"  <testcase class=\""<<t.className<<"\" name=\""<<t.testName<<"\">";
+      if (t.failed){
+        cout<<endl;
+        cout<<"    <failure type=\""<<t.errorMessage<<"\"/>"<<endl;
+      }
+      cout<<"  </testcase>"<<endl;
     }
-    cout<< "  <testcase time=\"0.02\" classname=\"net.heavydeck.ini.IniFileTest\" name=\"testGetValue\">" << endl;
-    cout<< "    <failure message=\"expected:&lt;null&gt; but was:&lt;0&gt;\" type=\"java.lang.AssertionError\"/>" << endl;
-    cout<< "    <system-out></system-out>" << endl;
-    cout<< "  </testcase>" << endl;
 
     //Write XML footer
     cout<< "</testsuite>"<<endl;
   }
 
-  testSuite* do_parse() {
-    testSuite* t = new testSuite;
+  //String-splitting utility
+  std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+  }
+  std::vector<std::string> split(const std::string &s, char delim) {
+    std::vector<std::string> elems;
+    split(s, delim, elems);
+    return elems;
+  }
 
-    return t;
+  void parseTest(string line, testSuite& t){
+    //cout<<"TEST"<<endl;
+  }
+
+  void parseAssert(string line, testSuite& t){
+    ///Get required info
+    vector<string> lv = split(line, ',');
+    bool failed = lv[7]=="OK" ? false : true;
+    string testName  = "@" + lv[4];
+    string className = lv[3];
+    string errMessage = lv[7];
+    if (failed)
+      t.addFail(className, testName, errMessage);
+    else
+      t.addSuccess(className, testName);
+  }
+
+  void parseLine(string line, testSuite& t){
+    if(line.find("SHU,TEST,")==0){
+      parseTest(line, t);
+    }
+    else if(line.find("SHU,ASSERT,")==0){
+      parseAssert(line, t);
+    }
+    else{
+      cerr<<line<<endl;
+    }
+  }
+
+  int process_input () {
+    testSuite t;
+    while(!cin.eof()){
+      string s;
+      cin>>s;
+      parseLine(s, t);
+    }
+    dump_xml(t);
+    return 0;
   }
 
 } //Namespace
 
 int main (int argc, char** argv){
-  shellUnit::testSuite t;
-  t.addProperty("AAA", "BBB");
-  dump_xml(t);
-  return 0;
+  return shellUnit::process_input();
 }
