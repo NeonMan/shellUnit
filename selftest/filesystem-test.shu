@@ -31,7 +31,6 @@ testIsSomething () {
 	assertGroupIs a_file $ME
 	assertGroupIsNot a_file "NOT$ME"
 	assertPermissionsAre a_file 777
-	assertPermissionsAre a_file -rwxrwxrwx
+	assertPermissionsAre a_file '/g=rwx'
 	assertPermissionsAreNot a_file 666
-	assertPermissionsAreNot a_file drwxrwxrwx
 }

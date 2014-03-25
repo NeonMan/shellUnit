@@ -67,7 +67,7 @@ assertExists () {
 #
 # Params:
 #     $1 <-- A path
-asserNotExists () {
+assertNotExists () {
 	if [ -e "$1" ]
 	then
 		fail "'$1' exists"
@@ -136,20 +136,13 @@ assertNotSameInode () {
 #     $1 <-- A path
 #     $2 <-- a user name | UID
 assertOwnerIs () {
-	SHU_USER=""
-	if [[ "$2" =~ [0-9][0-9]* ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -user "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		SHU_USER=`shu_userName "$2"`
+		fail "Expected user <$2>"
 	else
-		SHU_USER="$2"
-	fi
-	SHU_FOWNER=`shu_fileOwner "$1"`
-
-	if [ "$SHU_FOWNER" = "$SHU_USER" ]
-	then
 		pass
-	else
-		fail "Expected user <$SHU_USER> but found <$SHU_FOWNER>"
 	fi
 }
 
@@ -159,20 +152,13 @@ assertOwnerIs () {
 #     $1 <-- A path
 #     $2 <-- a user name | UID
 assertOwnerIsNot () {
-	SHU_USER=""
-	if [[ "$2" =~ [0-9][0-9]* ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -user "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		SHU_USER=`shu_userName "$2"`
-	else
-		SHU_USER="$2"
-	fi
-	SHU_FOWNER=`shu_fileOwner "$1"`
-
-	if [ "$SHU_FOWNER" = "$SHU_USER" ]
-	then
-		fail "Expected user not to be <$SHU_USER>"
-	else
 		pass
+	else
+		fail "Expected user not to be <$2>"
 	fi
 }
 
@@ -182,20 +168,13 @@ assertOwnerIsNot () {
 #     $1 <-- A path
 #     $2 <-- a group name | GID
 assertGroupIs () {
-	SHU_GROUP=""
-	if [[ "$2" =~ [0-9][0-9]* ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -group "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		SHU_GROUP=`shu_userGroup "$2"`
+		fail "Expected group <$2>"
 	else
-		SHU_GROUP="$2"
-	fi
-	SHU_FGRP=`shu_fileGroup "$1"`
-
-	if [ "$SHU_FOWNER" = "$SHU_USER" ]
-	then
 		pass
-	else
-		fail "Expected group <$SHU_USER> but found <$SHU_FOWNER>"
 	fi
 }
 
@@ -205,20 +184,13 @@ assertGroupIs () {
 #     $1 <-- A path
 #     $2 <-- a group name | GID
 assertGroupIsNot () {
-	SHU_GROUP=""
-	if [[ "$2" =~ [0-9][0-9]* ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -group "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		SHU_GROUP=`shu_userGroup "$2"`
-	else
-		SHU_GROUP="$2"
-	fi
-	SHU_FGRP=`shu_fileGroup "$1"`
-
-	if [ "$SHU_FOWNER" = "$SHU_USER" ]
-	then
-		fail "Expected group not to be <$SHU_USER>"
-	else
 		pass
+	else
+		fail "Expected group <$2>"
 	fi
 }
 
@@ -228,36 +200,14 @@ assertGroupIsNot () {
 #     $1 <-- path
 #     $2 <-- permissions
 assertPermissionsAre () {
-	#Check permissions format, either a number, 10-character code, prefix-operand-[rwx] (ToDo)
-	#Numeric permissions
-	if [[ "$2" =~ ^[0-7][0-7][0-7][0-7]? ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -perm "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		#Get permissions in numeric format
-		SHV_PERM=`stat --format="%a"  "$1"`
-		if [ "$SHV_PERM" -eq "$1" ]
-		then
-			pass
-		else
-			fail "Permissions are <$SHV_PERM> expected <$1>"
-		fi
-		return
+		fail "Expected permissions to match <$2>"
+	else
+		pass
 	fi
-	
-	#Ten-char permissions
-	if [[ "$2" =~ ^[d-][r-][w-][x-][r-][w-][x-][r-][w-][x-] ]]
-	then
-		SHV_PERM=`stat --format="%A"  "$1"`
-		if [ "$SHV_PERM" -eq "$1" ]
-		then
-			pass
-		else
-			fail "Permissions are <$SHV_PERM> expected <$1>"
-		fi
-		return
-	fi
-
-	#fail case
-	fail "Incorrect permission format"
 }
 
 #Test if file permissions don't match
@@ -266,36 +216,12 @@ assertPermissionsAre () {
 #     $1 <-- path
 #     $2 <-- permissions
 assertPermissionsAreNot () {
-	#Check permissions format, either a number, 10-character code, prefix-operand-[rwx] (ToDo)
-	SHV_PERMISSIONS=""
-	
-	#Numeric permissions
-	if [[ "$2" =~ ^[0-7][0-7][0-7][0-7]? ]]
+	SHU_FDIR=`dirname "$1"`
+	SHU_TEMP=`find "$SHU_FDIR" -perm "$2" | grep -F "$1"`
+	if [ "$SHU_TEMP" = "" ]
 	then
-		#Get permissions in numeric format
-		SHV_PERM=`stat --format="%a"  "$1"`
-		if [ "$SHV_PERM" -eq "$1" ]
-		then
-			fail "Permissions are <$SHV_PERM> expected <$1>"
-		else
-			pass
-		fi
-		return
+		pass
+	else
+		fail "Expected permissions not to match <$2>"
 	fi
-	
-	#Ten-char permissions
-	if [[ "$2" =~ ^[d-][r-][w-][x-][r-][w-][x-][r-][w-][x-] ]]
-	then
-		SHV_PERM=`stat --format="%A"  "$1"`
-		if [ "$SHV_PERM" -eq "$1" ]
-		then
-			fail "Permissions are <$SHV_PERM> expected <$1>"
-		else
-			pass
-		fi
-		return
-	fi
-
-	#fail case
-	fail "Incorrect permission format"
 }
